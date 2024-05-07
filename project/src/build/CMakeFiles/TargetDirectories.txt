@@ -1,0 +1,3 @@
+/home/adrian/project/src/build/CMakeFiles/dds_pqsec.dir
+/home/adrian/project/src/build/CMakeFiles/edit_cache.dir
+/home/adrian/project/src/build/CMakeFiles/rebuild_cache.dir

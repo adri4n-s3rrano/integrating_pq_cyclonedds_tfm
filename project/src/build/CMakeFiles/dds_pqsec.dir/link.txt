@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -shared -Wl,-soname,libdds_pqsec.so.1 -o lib/libdds_pqsec.so.1.0 CMakeFiles/dds_pqsec.dir/authentication.c.o CMakeFiles/dds_pqsec.dir/auth_utils.c.o CMakeFiles/dds_pqsec.dir/openssl/src/openssl_support.c.o  /usr/lib/x86_64-linux-gnu/libssl.so /opt/liboqs/lib/liboqs.a /usr/lib/x86_64-linux-gnu/libcrypto.so /usr/lib/x86_64-linux-gnu/libcrypto.so
