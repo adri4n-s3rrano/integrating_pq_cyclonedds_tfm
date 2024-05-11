@@ -13,7 +13,7 @@ This repository implements a Key Encapsulation Mechanism (KEM) handshake using p
 - Decapsulation: Upon receiving the encapsulated key or ciphertext, the other party decapsulates it to obtain the same shared secret.
 
 ### Implementation Details:
-- This code is developed based on the built-in Authentication plugin of CycloneDDS. The Authentication plugin source code is available at the [GitHub CycloneDDS repository](https://github.com/eclipse-cyclonedds/cyclonedds).
+- This code is developed based on the built-in Authentication plugin of CycloneDDS, that uses Diffie-Hellman for the key exchange instead. The Authentication plugin source code is available at the [GitHub CycloneDDS repository](https://github.com/eclipse-cyclonedds/cyclonedds). 
 - The KEM funcionalities have been developed using the C liboqs library.
 
 ### Usage:

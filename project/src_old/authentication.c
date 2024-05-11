@@ -37,8 +37,7 @@
 #define EVP_PKEY_id(k) ((k)->type)
 #endif
 
-#define HANDSHAKE_SIGNATURE_CONTENT_SIZE 4
-#define HANDSHAKE_SIGNATURE_CONTENT_SIZE_OPT 6
+#define HANDSHAKE_SIGNATURE_CONTENT_SIZE 6
 #define ADJUSTED_GUID_PREFIX_FLAG 0x80
 
 typedef unsigned char HashValue_t[SHA256_DIGEST_LENGTH];
@@ -245,7 +244,7 @@ static void local_identity_info_free(SecurityObject *obj)
     if (identity->identityCA)
       X509_free(identity->identityCA);
     if (identity->privateKey)
-      EVP_PKEY_free(identity->privateKey); 
+      EVP_PKEY_free(identity->privateKey); //Sustitute
     if (identity->kem_private)
       free(identity->kem_private);
     if (identity->kem_secret)
@@ -277,16 +276,14 @@ static LocalIdentityInfo *local_identity_info_new(DDS_Security_DomainId domainId
   identity->domainId = domainId;
   identity->identityCert = identityCert;
   identity->identityCA = identityCa;
-  identity->privateKey = privateKey; 
+  identity->privateKey = privateKey; //Sustitute
   identity->kem_private;
   identity->kem_secret;
   identity->crl = crl;
   identity->permissionsDocument = NULL;
-  identity->dsignAlgoKind = get_authentication_algo_kind(identityCert, PLUGIN_DEBUG);
-  //identity->dsignAlgoKind = PLUGIN_DEBUG ? AUTH_ALGO_KIND_DILITHIUM_3 : get_authentication_algo_kind(identityCert); 
-  //identity->kagreeAlgoKind = AUTH_ALGO_KIND_EC_PRIME256V1;
-  identity->kagreeAlgoKind = PLUGIN_DEBUG ? AUTH_ALGO_KIND_KYBER_768 : AUTH_ALGO_KIND_EC_PRIME256V1;
-  
+  identity->dsignAlgoKind = get_authentication_algo_kind(identityCert, PLUGIN_DEBUG); // if we use PQ: identity->dsignAlgoKind = AUTH_ALGO_KIND_DILITHIUM_3 
+  identity->kagreeAlgoKind = AUTH_ALGO_KIND_EC_PRIME256V1; // if we use PQ: identity->kagreeAlgoKind = AUTH_ALGO_KIND_KYBER_768;
+
   memcpy(&identity->candidateGUID, candidate_participant_guid, sizeof(DDS_Security_GUID_t));
   memcpy(&identity->adjustedGUID, adjusted_participant_guid, sizeof(DDS_Security_GUID_t));
 
@@ -345,7 +342,7 @@ static RemoteIdentityInfo *remote_identity_info_new(const DDS_Security_GUID_t *g
   DDS_Security_DataHolder_copy(identity->remoteIdentityToken, remote_identity_token);
   identity->identityCert = NULL;
   identity->dsignAlgoKind = AUTH_ALGO_KIND_UNKNOWN;
-  identity->kagreeAlgoKind = AUTH_ALGO_KIND_UNKNOWN;
+  identity->kagreeAlgoKind = AUTH_ALGO_KIND_UNKNOWN; //Sustitute for the value included in the localidentity 
   identity->permissionsDocument = ddsrt_strdup("");
   identity->linkHash = ddsrt_hh_new(32, security_object_hash, security_object_equal);
   return identity;
@@ -394,16 +391,16 @@ static void handshake_info_free(SecurityObject *obj)
   HandshakeInfo *handshake = (HandshakeInfo *)obj;
   if (handshake)
   {
-    if (handshake->ldh) 
+    if (handshake->ldh) //Sustitute
       EVP_PKEY_free(handshake->ldh);
-    if (handshake->rdh) 
+    if (handshake->rdh) //sustitute
       EVP_PKEY_free(handshake->rdh);
     if (handshake->kem_public)
       free(handshake->kem_public);
     if (handshake->kem_ciphertext)
       free(handshake->kem_ciphertext);
 
-    if (handshake->shared_secret_handle_impl)
+    if (handshake->shared_secret_handle_impl) //Sustitute: Check whether to use shared secret impl or local/remote attribute  
     {
       ddsrt_free(handshake->shared_secret_handle_impl->shared_secret);
       ddsrt_free(handshake->shared_secret_handle_impl);
@@ -485,7 +482,7 @@ static const char *get_dsign_algo(AuthenticationAlgoKind_t kind)
     return AUTH_DSIG_ALGO_RSA_2048_SHA256_IDENT;
   case AUTH_ALGO_KIND_EC_PRIME256V1:
     return AUTH_DSIG_ALGO_ECDSA_SHA256_IDENT;
-  case AUTH_ALGO_KIND_DILITHIUM_3:
+  case AUTH_ALGO_KIND_DILITHIUM_3: // Sustitute once we know how to extract pq certificate fields 
     return AUTH_DSIG_ALGO_DILITHIUM_3_SHA256_IDENT;
   default:
     assert(0);
@@ -567,7 +564,7 @@ static void get_hash_binary_property_seq(const DDS_Security_BinaryPropertySeq *s
 }
 
 static DDS_Security_ValidationResult_t create_validate_signature_impl(bool create, EVP_PKEY *pkey, const DDS_Security_BinaryProperty_t **bprops,
-    const uint32_t n_bprops, unsigned char **signature, size_t *signature_len, DDS_Security_SecurityException *ex) 
+    const uint32_t n_bprops, unsigned char **signature, size_t *signature_len, DDS_Security_SecurityException *ex) //Sustitute
 {
   DDS_Security_ValidationResult_t result;
   unsigned char *buffer;
@@ -575,25 +572,48 @@ static DDS_Security_ValidationResult_t create_validate_signature_impl(bool creat
   DDS_Security_Serializer serializer = DDS_Security_Serializer_new(4096, 4096);
   DDS_Security_Serialize_BinaryPropertyArray(serializer, bprops, n_bprops);
   DDS_Security_Serializer_buffer(serializer, &buffer, &size);
-  result = create_validate_asymmetrical_signature(create, pkey, buffer, size, signature, signature_len, ex); 
+  result = create_validate_asymmetrical_signature(create, pkey, buffer, size, signature, signature_len, ex); //Sustitute
   ddsrt_free(buffer);
   DDS_Security_Serializer_free(serializer);
   return result;
 }
 
 static DDS_Security_ValidationResult_t create_signature(EVP_PKEY *pkey, const DDS_Security_BinaryProperty_t **bprops,
-    const uint32_t n_bprops, unsigned char **signature, size_t *signature_len, DDS_Security_SecurityException *ex) 
+    const uint32_t n_bprops, unsigned char **signature, size_t *signature_len, DDS_Security_SecurityException *ex) //Sustitute
 {
   return create_validate_signature_impl(true, pkey, bprops, n_bprops, signature, signature_len, ex);
 }
 
 static DDS_Security_ValidationResult_t validate_signature(EVP_PKEY *pkey, const DDS_Security_BinaryProperty_t **bprops,
-    const uint32_t n_bprops, const unsigned char *signature, size_t signature_len, DDS_Security_SecurityException *ex) 
+    const uint32_t n_bprops, const unsigned char *signature, size_t signature_len, DDS_Security_SecurityException *ex) //Sustitute
 {
   unsigned char *s = (unsigned char *)signature;
   size_t s_len = signature_len;
   return create_validate_signature_impl(false, pkey, bprops, n_bprops, &s, &s_len, ex);
 }
+
+/*
+static DDS_Security_ValidationResult_t validate_pq_signature(uint8_t *sign_pkey, const DDS_Security_BinaryProperty_t **bprops,
+    const uint32_t n_bprops, const uint8_t *signature, size_t signature_len, DDS_Security_SecurityException *ex) //Sustitute
+{
+  unsigned char *buffer;
+  size_t message_len;
+
+  DDS_Security_Serializer serializer = DDS_Security_Serializer_new(4096, 4096);
+  DDS_Security_Serialize_BinaryPropertyArray(serializer, bprops, n_bprops);
+  DDS_Security_Serializer_buffer(serializer, &buffer, &message_len);
+
+  uint8_t *message[message_len * sizeof(uint8_t)];
+  memcpy(message, buffer, message_len);
+
+
+  rc = OQS_SIG_dilithium_3_verify(message, message_len, signature, signature_len, sign_pkey);
+	if (rc != OQS_SUCCESS) {
+		return DDS_SECURITY_VALIDATION_FAILED;
+	}
+return DDS_SECURITY_VALIDATION_OK;
+}*/
+
 
 static DDS_Security_ValidationResult_t compute_hash_value(HashValue_t value, const DDS_Security_BinaryProperty_t **properties,
     const uint32_t properties_length, DDS_Security_SecurityException *ex)
@@ -1147,13 +1167,39 @@ err_inv_handle:
 DDS_Security_ValidationResult_t begin_handshake_request(dds_security_authentication *instance, DDS_Security_HandshakeHandle *handshake_handle,
     DDS_Security_HandshakeMessageToken *handshake_message, const DDS_Security_IdentityHandle initiator_identity_handle, const DDS_Security_IdentityHandle replier_identity_handle,
     const DDS_Security_OctetSeq *serialized_local_participant_data, DDS_Security_SecurityException *ex)
-{ 
+{
   if (PLUGIN_DEBUG) {
-    printf("CUSTOM PLUGIN: PQ begin_handshake_request()\n");
-  }
-  else{
     printf("CUSTOM PLUGIN: begin_handshake_request()\n");
   }
+
+  //oqs_kem.c
+  /*typedef struct {OSSL_LIB_CTX *libctx; OQSX_KEY *kem;} PROV_OQSKEM_CTX;
+  1)oqs_kem_newctx(void *provctx) te devuelve un PROV_OQSKEM_CTX sin clave. Pero como obtengo el provctx?*/ 
+  
+  //oqs_kmgmt.c
+  /*struct oqsx_gen_ctx *gener_key = NULL;
+  static void *oqsx_gen_init(void *provctx, int selection, char *oqs_name, char *tls_name, int primitive, int bit_security, int alg_idx) 
+  2)gener_key = oqsx_gen_init(void *provctx, 0, "OQS_KEM_alg_kyber_768", "kyber768", KEY_TYPE_KEM, 128, alg_idx);
+  3)oqsx_genkey(struct oqsx_gen_ctx *gctx) llama a oqsx_key_new() y te devulve la key a meter en el conexto*/
+  
+  /*oqsprov_keys.c
+  OQSX_KEY *oqsx_key_new(OSSL_LIB_CTX *libctx, char *oqs_name, char *tls_name, int primitive, const char *propq, int bit_security, int alg_idx) obtengo la OQSX_KEY para la siguiente funcion
+  oqsx_key_gen_oqs(OQSX_KEY *key, int gen_kem) creas las claves
+  4)oqsx_key_gen_oqs(&key, 1);*/
+
+  /*oqs_test_evp_pkey_params.c
+   if (!(evp_pkey_ctx = init_EVP_PKEY_CTX(libctx, algname))) {
+        goto out;}
+
+    if (init_keygen(evp_pkey_ctx) != 1) {
+        goto free_evp_pkey_ctx;}
+
+    if (!(private_key = generate_private_key(evp_pkey_ctx))) {
+        goto free_evp_pkey_ctx;}
+
+    if (private_key_params_get_pq_keys(private_key, &pq_keypair)) {
+        goto free_classical_keypair;}
+  */
 
   if (!instance || !handshake_handle || !handshake_message || !serialized_local_participant_data)
   {
@@ -1162,23 +1208,19 @@ DDS_Security_ValidationResult_t begin_handshake_request(dds_security_authenticat
   }
 
   dds_security_authentication_impl *impl = (dds_security_authentication_impl *)instance;
-  if (HASH_OPTIONAL){
-    impl->include_optional = 1;
-  }
   HandshakeInfo *handshake = NULL;
   IdentityRelation *relation = NULL;
   SecurityObject *obj;
   LocalIdentityInfo *localIdent;
   RemoteIdentityInfo *remoteIdent;
-  uint32_t tokcount = impl->include_optional ? 8 : 7; //DH and KEM send the same number of values 
-  int created = 0;
-  /*DH*/
-  EVP_PKEY *dhkey; 
-  unsigned char *certData, *dhPubKeyData = NULL; 
+  EVP_PKEY *dhkey; //Sustitute: EVP key (openssl), Liboqs or OQSX KEY (oqs-provider) can be used
+  unsigned char *certData, *dhPubKeyData = NULL; //Sustitute: check fields extraction in pq cerificates
   uint32_t certDataSize, dhPubKeyDataSize;
-  /*PQ*/
-  uint8_t *kem_public_key;
-  uint8_t *kem_secret_key;
+  if (HASH_OPTIONAL){
+    impl->include_optional = 1;
+  }
+  uint32_t tokcount = impl->include_optional ? 9 : 8; //Sustitute. 8 : 7 correct. We add kem_pub but we eliminate dh params
+  int created = 0;
 
   ddsrt_mutex_lock(&impl->lock);
 
@@ -1198,6 +1240,13 @@ DDS_Security_ValidationResult_t begin_handshake_request(dds_security_authenticat
   }
   remoteIdent = (RemoteIdentityInfo *)obj;
   
+  /* Sustitute get certificate contents in order to include pq certificates: 
+    https://www.ietf.org/archive/id/draft-massimo-lamps-pq-sig-certificates-00.html
+    - DilithiumPublicKey ::= OCTET STRING. DilithiumPublicKey 32+320*k bytes.
+    - Size of private key elements is 32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes*/
+  if (get_certificate_contents(localIdent->identityCert, &certData, &certDataSize, ex) != DDS_SECURITY_VALIDATION_OK)
+    goto err_alloc_cid;
+
   if (!(handshake = find_handshake(impl, SECURITY_OBJECT_HANDLE(localIdent), SECURITY_OBJECT_HANDLE(remoteIdent))))
   {
     relation = find_identity_relation(remoteIdent, SECURITY_OBJECT_HANDLE(localIdent));
@@ -1213,35 +1262,49 @@ DDS_Security_ValidationResult_t begin_handshake_request(dds_security_authenticat
     assert(relation);
   }
   
-  if (get_certificate_contents(localIdent->identityCert, &certData, &certDataSize, ex) != DDS_SECURITY_VALIDATION_OK)
-    goto err_alloc_cid;
-  
-  if (!PLUGIN_DEBUG){
-    if (!handshake->ldh){ /*DH key generation*/
-      if (generate_dh_keys(&dhkey, localIdent->kagreeAlgoKind, ex) != DDS_SECURITY_VALIDATION_OK)
-        goto err_gen_dh_keys;
-      handshake->ldh = dhkey;
-    }
-    if (dh_public_key_to_oct(handshake->ldh, localIdent->kagreeAlgoKind, &dhPubKeyData, &dhPubKeyDataSize, ex) != DDS_SECURITY_VALIDATION_OK){
-      goto err_get_public_key;}
-    assert(dhPubKeyData);
-    assert(dhPubKeyDataSize < 1200);
+  clock_t start_dh, end_dh;
+  clock_t start_kem, end_kem;
+  double cpu_time_used_dh, cpu_time_used_kem;
+  if (!handshake->ldh) //Sustitute 
+  { 
+    start_dh = clock();
+    if (generate_dh_keys(&dhkey, localIdent->kagreeAlgoKind, ex) != DDS_SECURITY_VALIDATION_OK)
+      goto err_gen_dh_keys;
+    end_dh = clock();
+    cpu_time_used_dh = ((double) (end_dh - start_dh)) / CLOCKS_PER_SEC;
+    printf("One key generation in DH: %f segundos\n", cpu_time_used_dh);
+    handshake->ldh = dhkey;
   }
-  else{ /*PQ key generation*/
-    
-    size_t length_public_key;
-    size_t length_secret_key;
-    generate_kem_keys(&kem_public_key, &kem_secret_key, &length_public_key, &length_secret_key, localIdent->kagreeAlgoKind);
-    handshake->kem_public = malloc(length_public_key * sizeof(uint8_t));
-    memcpy(handshake->kem_public, kem_public_key, length_public_key);
-    localIdent->kem_private = malloc(length_secret_key * sizeof(uint8_t));
-    memcpy(localIdent->kem_private, kem_secret_key, length_secret_key);
-  }
+
+  start_kem = clock();
+  uint8_t kem_public_key[OQS_KEM_kyber_768_length_public_key];
+  uint8_t kem_secret_key[OQS_KEM_kyber_768_length_secret_key];
+
+  OQS_STATUS rc = OQS_KEM_kyber_768_keypair(kem_public_key, kem_secret_key);
+  end_kem = clock();
+  cpu_time_used_kem = ((double) (end_kem - start_kem)) / CLOCKS_PER_SEC;
+  printf("\nPublic and private key generation in KEM: %f segundos\n", cpu_time_used_kem);
+  //printing key value
+  /*printf("\npublic key value\n");
+  for (int i = 0; i < OQS_KEM_kyber_768_length_public_key; ++i) {
+      printf("%02X ", kem_public_key[i]); // Imprimir cada byte en hexadecimal
+  }*/
+
+  //handshake->kem_public = kem_public_key;
+  handshake->kem_public = malloc(OQS_KEM_kyber_768_length_public_key * sizeof(uint8_t));
+  memcpy(handshake->kem_public, kem_public_key, OQS_KEM_kyber_768_length_public_key);
+
+  //localIdent->kem_private = kem_secret_key;
+  localIdent->kem_private = malloc(OQS_KEM_kyber_768_length_secret_key * sizeof(uint8_t));
+  memcpy(localIdent->kem_private, kem_secret_key, OQS_KEM_kyber_768_length_secret_key);
+
+  if (dh_public_key_to_oct(handshake->ldh, localIdent->kagreeAlgoKind, &dhPubKeyData, &dhPubKeyDataSize, ex) != DDS_SECURITY_VALIDATION_OK)
+    goto err_get_public_key; //sustitute
 
   if (localIdent->pdata._length == 0)
     DDS_Security_OctetSeq_copy(&localIdent->pdata, serialized_local_participant_data);
 
-  DDS_Security_BinaryProperty_t *tokens = DDS_Security_BinaryPropertySeq_allocbuf(tokcount); 
+  DDS_Security_BinaryProperty_t *tokens = DDS_Security_BinaryPropertySeq_allocbuf(tokcount); //Initialized at the beginning of the function
   uint32_t tokidx = 0;
 
   DDS_Security_BinaryProperty_set_by_ref(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_C_ID, certData, certDataSize);
@@ -1252,23 +1315,22 @@ DDS_Security_ValidationResult_t begin_handshake_request(dds_security_authenticat
 
   /* Todo: including hash_c1 is optional (conform spec); add a configuration option to leave it out */
   if (impl->include_optional){
-    DDS_Security_BinaryPropertySeq bseq = { ._length = 5, ._buffer = tokens };
+    DDS_Security_BinaryPropertySeq bseq = { ._length = 5, ._buffer = tokens }; //Sustitute 5 for 6
     get_hash_binary_property_seq(&bseq, handshake->hash_c1);
     DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_HASH_C1, handshake->hash_c1, sizeof(HashValue_t));
   }
+  
+  DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_KEM_PUBLIC, kem_public_key, OQS_KEM_kyber_768_length_public_key * sizeof(uint8_t));
+  
+  /* Set the DH public key associated with the local participant in dh1 property */ //Sustitute
+  assert(dhPubKeyData);
+  assert(dhPubKeyDataSize < 1200);
+  DDS_Security_BinaryProperty_set_by_ref(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_DH1, dhPubKeyData, dhPubKeyDataSize);
 
   /* Set the challenge in challenge1 property */
   DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_CHALLENGE1, relation->lchallenge->value, sizeof(AuthenticationChallenge));
 
-  if (PLUGIN_DEBUG){
-    /* Set the KEM public key in KEM_PUBLIC property */ 
-    DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_KEM_PUBLIC, kem_public_key, OQS_KEM_kyber_768_length_public_key * sizeof(uint8_t));
-  }
-  else{
-    /* Set the DH public key associated with the local participant in dh1 property */ 
-    DDS_Security_BinaryProperty_set_by_ref(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_DH1, dhPubKeyData, dhPubKeyDataSize);
-  }
- 
+  //We add the handshake but is a hash table so the hash of the handshake should be included instead. 
   (void)ddsrt_hh_add(impl->objectHash, handshake);
 
   ddsrt_mutex_unlock(&impl->lock);
@@ -1290,13 +1352,14 @@ err_gen_dh_keys:
     (void)ddsrt_hh_remove(impl->objectHash, handshake);
     security_object_free((SecurityObject *)handshake);
   }
+
 err_gen_kem_keys:
   if (created)
   {
     (void)ddsrt_hh_remove(impl->objectHash, handshake);
     security_object_free((SecurityObject *)handshake);
-    return DDS_SECURITY_VALIDATION_FAILED;
   }
+
 err_alloc_cid:
   ddsrt_free(certData);
 err_inv_handle:
@@ -1366,7 +1429,7 @@ static const DDS_Security_BinaryProperty_t *find_required_binprop (const DDS_Sec
   const DDS_Security_BinaryProperty_t *prop = DDS_Security_DataHolder_find_binary_property (token, name);
   if (prop == NULL)
   {
-    result = set_exception (ex, "process_handshake: HandshakeMessageToken property %s missing", name); 
+    result = set_exception (ex, "process_handshake: HandshakeMessageToken property %s missing", name); //error validate token de la reply
     (void) result;
     return NULL;
   }
@@ -1385,6 +1448,7 @@ static const DDS_Security_BinaryProperty_t *find_required_nonempty_binprop (cons
   const DDS_Security_BinaryProperty_t *prop = find_required_binprop (token, name, ex);
   if (prop->value._length == 0 || prop->value._buffer == NULL)
   {
+    // FIXME: _buffer == NULL check must go, that should've been guaranteed before
     result = set_exception (ex, "process_handshake: HandshakeMessageToken property %s is empty", name);
     (void) result;
     return NULL;
@@ -1465,22 +1529,19 @@ static DDS_Security_ValidationResult_t validate_handshake_token_impl (const DDS_
   X509 *identityCert = NULL;
   const DDS_Security_BinaryProperty_t *c_pdata = NULL;
   AuthenticationAlgoKind_t dsignAlgoKind = AUTH_ALGO_KIND_UNKNOWN, kagreeAlgoKind = AUTH_ALGO_KIND_UNKNOWN;
-  const DDS_Security_BinaryProperty_t *dh1 = NULL, *dh2 = NULL; 
+  const DDS_Security_BinaryProperty_t *dh1 = NULL, *dh2 = NULL; //Sustitute
   const DDS_Security_BinaryProperty_t *hash_c1 = NULL, *hash_c2 = NULL;
   const DDS_Security_BinaryProperty_t *challenge1 = NULL, *challenge2 = NULL;
   const DDS_Security_BinaryProperty_t *signature = NULL;
-  const DDS_Security_BinaryProperty_t *signature_kem;
-  const DDS_Security_BinaryProperty_t *kem_pub;
-  const DDS_Security_BinaryProperty_t *kem_ciphertext;
-  const DDS_Security_BinaryProperty_t *sign_public_key;
-  size_t num_elements = token->binary_properties._length;
+  const DDS_Security_BinaryProperty_t *signature_kem = NULL;
+  const DDS_Security_BinaryProperty_t *kem_pub = NULL;
+  const DDS_Security_BinaryProperty_t *kem_ciphertext = NULL;
+  const DDS_Security_BinaryProperty_t *sign_public_key = NULL;
   const char *token_class_id = NULL;
 
   assert (relation);
-  if (!PLUGIN_DEBUG){
-    assert (dh1_ref != NULL || token_type == HS_TOKEN_REQ); 
-    assert (dh2_ref != NULL || token_type == HS_TOKEN_REQ || token_type == HS_TOKEN_REPLY); 
-  }
+  assert (dh1_ref != NULL || token_type == HS_TOKEN_REQ); //Sustitute
+  assert (dh2_ref != NULL || token_type == HS_TOKEN_REQ || token_type == HS_TOKEN_REPLY); //Sustitute
 
   switch (token_type)
   {
@@ -1502,7 +1563,7 @@ static DDS_Security_ValidationResult_t validate_handshake_token_impl (const DDS_
     if ((identityCert = load_X509_certificate_from_binprop (c_id, relation->localIdentity->identityCA, relation->localIdentity->crl, trusted_ca_list, ex)) == NULL)
       return DDS_SECURITY_VALIDATION_FAILED;
 
-    /* check if an identity certificate was already associated with the remote identity and when that is the case both should be the same */
+    /* TODO: check if an identity certificate was already associated with the remote identity and when that is the case both should be the same */
     if (relation->remoteIdentity->identityCert)
       /*if (X509_cmp(relation->remoteIdentity->identityCert, identityCert)!=0){
         return DDS_SECURITY_VALIDATION_FAILED;
@@ -1532,45 +1593,35 @@ static DDS_Security_ValidationResult_t validate_handshake_token_impl (const DDS_
       return DDS_SECURITY_VALIDATION_FAILED;
     if ((kagreeAlgoKind = get_kagree_algo_from_octseq (&c_kagree_algo->value)) == AUTH_ALGO_KIND_UNKNOWN)
       return set_exception (ex, "process_handshake: HandshakeMessageToken property "DDS_AUTHTOKEN_PROP_C_KAGREE_ALGO" not supported");
+
+    if ((kem_pub = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_KEM_PUBLIC, ex)) == NULL)
+      return DDS_SECURITY_VALIDATION_FAILED;
     
-    assert (dsignAlgoKind != AUTH_ALGO_KIND_UNKNOWN);
-    assert (kagreeAlgoKind != AUTH_ALGO_KIND_UNKNOWN);
-    assert (c_pdata != NULL);
-
-    relation->remoteIdentity->dsignAlgoKind = dsignAlgoKind;
-    relation->remoteIdentity->kagreeAlgoKind = kagreeAlgoKind;
-    DDS_Security_OctetSeq_copy (&relation->remoteIdentity->pdata, &c_pdata->value);
-
-    /* calculate the hash value and set it in handshake hash_c1 (req) or hash_c2 (reply)*/
-    const DDS_Security_BinaryProperty_t *binary_properties[] = { c_id, c_perm, c_pdata, c_dsign_algo, c_kagree_algo }; 
-    (void) compute_hash_value ((token_type == HS_TOKEN_REQ) ? handshake->hash_c1 : handshake->hash_c2, binary_properties, 5, NULL);
+    /* calculate the hash value and set in handshake hash_c1 (req) or hash_c2 (reply)*/
+    const DDS_Security_BinaryProperty_t *binary_properties[] = { c_id, c_perm, c_pdata, c_dsign_algo, c_kagree_algo }; //kem_pub 
+    (void) compute_hash_value ((token_type == HS_TOKEN_REQ) ? handshake->hash_c1 : handshake->hash_c2, binary_properties, 5, NULL); //Sustitute size 5
   }
+  // we should check handshake hash calculated with value stored in token in hash property. If include->optional activated in previous token
+  //we use handshake of reply. Handshake c1 stores hash of request 
   
   if (token_type == HS_TOKEN_REQ)
-  { 
-    if (PLUGIN_DEBUG){
-      if ((kem_pub = find_required_nonempty_binprop(token, DDS_AUTHTOKEN_PROP_KEM_PUBLIC, ex)) == NULL)
-        return DDS_SECURITY_VALIDATION_FAILED;
-    }
-    
-    else{
-      EVP_PKEY *pdhkey_req = NULL; 
-      if ((dh1 = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_DH1, ex)) == NULL)
-        return DDS_SECURITY_VALIDATION_FAILED;
-      if (dh_oct_to_public_key (&pdhkey_req, kagreeAlgoKind, dh1->value._buffer, dh1->value._length, ex) != DDS_SECURITY_VALIDATION_OK)
-        return DDS_SECURITY_VALIDATION_FAILED;
-      if (handshake->rdh)
-        EVP_PKEY_free (handshake->rdh);
-      handshake->rdh = pdhkey_req;
-    }
+  {
+    EVP_PKEY *pdhkey_req = NULL; //Sustitute all
+
+    if ((dh1 = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_DH1, ex)) == NULL)
+      return DDS_SECURITY_VALIDATION_FAILED;
+    if (dh_oct_to_public_key (&pdhkey_req, kagreeAlgoKind, dh1->value._buffer, dh1->value._length, ex) != DDS_SECURITY_VALIDATION_OK)
+      return DDS_SECURITY_VALIDATION_FAILED;
+    if (handshake->rdh)
+      EVP_PKEY_free (handshake->rdh);
+    handshake->rdh = pdhkey_req;
   }
-  else{ 
-    if ((!PLUGIN_DEBUG && HS_TOKEN_REPLY && num_elements==12) || (!PLUGIN_DEBUG && HS_TOKEN_FINAL && num_elements==7)){
-      dh1 = DDS_Security_DataHolder_find_binary_property (token, DDS_AUTHTOKEN_PROP_DH1);
-      if (dh1 && !DDS_Security_BinaryProperty_equal(dh1_ref, dh1))
-        return set_exception (ex, "process_handshake: %s token property "DDS_AUTHTOKEN_PROP_DH1" not correct", (token_type == HS_TOKEN_REPLY) ? "Reply" : "Final");
-      dh1 = dh1_ref;
-    }
+  else //Sustitute
+  {
+    dh1 = DDS_Security_DataHolder_find_binary_property (token, DDS_AUTHTOKEN_PROP_DH1);
+    if (dh1 && !DDS_Security_BinaryProperty_equal(dh1_ref, dh1))
+      return set_exception (ex, "process_handshake: %s token property "DDS_AUTHTOKEN_PROP_DH1" not correct", (token_type == HS_TOKEN_REPLY) ? "Reply" : "Final");
+    dh1 = dh1_ref;
   }
 
   if ((challenge1 = find_required_binprop_exactsize (token, DDS_AUTHTOKEN_PROP_CHALLENGE1, sizeof (AuthenticationChallenge), ex)) == NULL)
@@ -1580,49 +1631,39 @@ static DDS_Security_ValidationResult_t validate_handshake_token_impl (const DDS_
   {
     if ((challenge2 = find_required_binprop_exactsize (token, DDS_AUTHTOKEN_PROP_CHALLENGE2, sizeof (AuthenticationChallenge), ex)) == NULL)
       return DDS_SECURITY_VALIDATION_FAILED;
+    if ((kem_pub = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_KEM_PUBLIC, ex)) == NULL)
+      return DDS_SECURITY_VALIDATION_FAILED;
+    if ((kem_ciphertext = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_KEM_CIPHERTEXT, ex)) == NULL)
+      return DDS_SECURITY_VALIDATION_FAILED;
+    if ((signature = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_SIGNATURE, ex)) == NULL)
+      return DDS_SECURITY_VALIDATION_FAILED;
+    if ((signature_kem = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_KEM_SIGNATURE, ex)) == NULL)
+      return DDS_SECURITY_VALIDATION_FAILED;
+    if ((sign_public_key = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_SIGNATURE_PUBLIC_KEY, ex)) == NULL)
+      return DDS_SECURITY_VALIDATION_FAILED;
 
-    if (PLUGIN_DEBUG){
-      if ((kem_pub = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_KEM_PUBLIC, ex)) == NULL)
-        return DDS_SECURITY_VALIDATION_FAILED;
-      if ((kem_ciphertext = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_KEM_CIPHERTEXT, ex)) == NULL)
-        return DDS_SECURITY_VALIDATION_FAILED;
-      if ((signature_kem = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_KEM_SIGNATURE, ex)) == NULL)
-        return DDS_SECURITY_VALIDATION_FAILED;
-      if ((sign_public_key = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_SIGNATURE_PUBLIC_KEY, ex)) == NULL)
-        return DDS_SECURITY_VALIDATION_FAILED;
-    }
-    else{
-      if ((signature = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_SIGNATURE, ex)) == NULL)
-        return DDS_SECURITY_VALIDATION_FAILED;
-    }
-
-    if (token_type == HS_TOKEN_REPLY) 
+    if (token_type == HS_TOKEN_REPLY) //Sustitute
     {
-      if (PLUGIN_DEBUG){
-        DDS_Security_BinaryProperty_t *hand_kem_pub = DDS_Security_BinaryProperty_alloc();
-        DDS_Security_BinaryProperty_set_by_value(hand_kem_pub, DDS_AUTHTOKEN_PROP_KEM_PUBLIC, handshake->kem_public, OQS_KEM_kyber_768_length_public_key * sizeof(uint8_t));
-        if (kem_pub && !DDS_Security_BinaryProperty_equal(hand_kem_pub, kem_pub))
-          return set_exception (ex, "process_handshake: DDS_AUTHTOKEN_PROP_KEM_PUBLIC and handshake->kem_public not equal");
-      }
-      else{
-        EVP_PKEY *pdhkey_reply = NULL;
-        if ((dh2 = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_DH2, ex)) == NULL)
-          return DDS_SECURITY_VALIDATION_FAILED;
-        if (dh_oct_to_public_key (&pdhkey_reply, kagreeAlgoKind, dh2->value._buffer, dh2->value._length, ex) != DDS_SECURITY_VALIDATION_OK)
-          return DDS_SECURITY_VALIDATION_FAILED;
-        if (handshake->rdh)
-            EVP_PKEY_free (handshake->rdh);
-        handshake->rdh = pdhkey_reply;
-      }
+      EVP_PKEY *pdhkey_reply = NULL;
+      if ((dh2 = find_required_nonempty_binprop (token, DDS_AUTHTOKEN_PROP_DH2, ex)) == NULL)
+        return DDS_SECURITY_VALIDATION_FAILED;
+      if (dh_oct_to_public_key (&pdhkey_reply, kagreeAlgoKind, dh2->value._buffer, dh2->value._length, ex) != DDS_SECURITY_VALIDATION_OK)
+        return DDS_SECURITY_VALIDATION_FAILED;
+      if (handshake->rdh)
+           EVP_PKEY_free (handshake->rdh);
+      handshake->rdh = pdhkey_reply;
+
+      DDS_Security_BinaryProperty_t *hand_kem_pub = DDS_Security_BinaryProperty_alloc();
+      DDS_Security_BinaryProperty_set_by_value(hand_kem_pub, DDS_AUTHTOKEN_PROP_KEM_PUBLIC, handshake->kem_public, OQS_KEM_kyber_768_length_public_key * sizeof(uint8_t));
+      if (kem_pub && !DDS_Security_BinaryProperty_equal(hand_kem_pub, kem_pub))
+       return set_exception (ex, "process_handshake: DDS_AUTHTOKEN_PROP_KEM_PUBLIC and handshake->kem_public not equal");
     }
     else
     {
-      if (!PLUGIN_DEBUG && num_elements==7){
-        dh2 = DDS_Security_DataHolder_find_binary_property (token, DDS_AUTHTOKEN_PROP_DH2);
-        if (dh2 && !DDS_Security_BinaryProperty_equal(dh2_ref, dh2))
-          return set_exception (ex, "process_handshake: Final token property "DDS_AUTHTOKEN_PROP_DH2" not correct");
-        dh2 = dh2_ref;
-      }
+      dh2 = DDS_Security_DataHolder_find_binary_property (token, DDS_AUTHTOKEN_PROP_DH2);
+      if (dh2 && !DDS_Security_BinaryProperty_equal(dh2_ref, dh2))
+        return set_exception (ex, "process_handshake: Final token property "DDS_AUTHTOKEN_PROP_DH2" not correct");
+      dh2 = dh2_ref;
     }
   }
 
@@ -1642,121 +1683,117 @@ static DDS_Security_ValidationResult_t validate_handshake_token_impl (const DDS_
 
   /* From DDS Security spec: inclusion of the hash_c1 property is optional. Its only purpose is to
      facilitate troubleshoot interoperability problems. */
-  if ((HS_TOKEN_REQ && num_elements==8) || (HS_TOKEN_REPLY && num_elements>11) || (HS_TOKEN_FINAL && num_elements>6)){
-    if ((hash_c1 = DDS_Security_DataHolder_find_binary_property (token, DDS_AUTHTOKEN_PROP_HASH_C1)))
-    {
-      /* hash_c1 was computed before */
-      assert (handshake->hash_c1 != NULL);
-      if (hash_c1->value._length != sizeof (HashValue_t) || memcmp (hash_c1->value._buffer, handshake->hash_c1, sizeof (HashValue_t)) != 0)
-        return set_exception (ex, "process_handshake: HandshakeMessageToken property "DDS_AUTHTOKEN_PROP_HASH_C1" invalid");
-    }
+  if ((hash_c1 = DDS_Security_DataHolder_find_binary_property (token, DDS_AUTHTOKEN_PROP_HASH_C1)))
+  {
+    /* hash_c1 should be set during req or reply token validation */
+    assert (handshake->hash_c1 != NULL);
+    if (hash_c1->value._length != sizeof (HashValue_t) || memcmp (hash_c1->value._buffer, handshake->hash_c1, sizeof (HashValue_t)) != 0)
+      return set_exception (ex, "process_handshake: HandshakeMessageToken property "DDS_AUTHTOKEN_PROP_HASH_C1" invalid");
   }
 
   if (token_type == HS_TOKEN_REPLY || token_type == HS_TOKEN_FINAL)
   {
-     if ((HS_TOKEN_REPLY && num_elements>11) || (HS_TOKEN_FINAL && num_elements>6))
-     {
-      assert (handshake->hash_c2 != NULL);
-      /* From DDS Security spec: inclusion of the hash_c2 property is optional. Its only purpose is to
+    /* hash_c2 should be set during reply token validation */
+    assert (handshake->hash_c2 != NULL);
+
+    /* From DDS Security spec: inclusion of the hash_c2 property is optional. Its only purpose is to
        facilitate troubleshoot interoperability problems. */
-      if ((hash_c2 = DDS_Security_DataHolder_find_binary_property (token, DDS_AUTHTOKEN_PROP_HASH_C2)))
-      {
-        if (hash_c2->value._length != sizeof (HashValue_t) || memcmp (hash_c2->value._buffer, handshake->hash_c2, sizeof (HashValue_t)) != 0)
-          return set_exception (ex, "process_handshake: HandshakeMessageToken property hash_c2 invalid");
-      }
+    if ((hash_c2 = DDS_Security_DataHolder_find_binary_property (token, DDS_AUTHTOKEN_PROP_HASH_C2)))
+    {
+      if (hash_c2->value._length != sizeof (HashValue_t) || memcmp (hash_c2->value._buffer, handshake->hash_c2, sizeof (HashValue_t)) != 0)
+        return set_exception (ex, "process_handshake: HandshakeMessageToken property hash_c2 invalid");
     }
     if (relation->lchallenge == NULL)
       return set_exception (ex, "process_handshake: No future challenge exists for this token");
     const DDS_Security_BinaryProperty_t *lc = (token_type == HS_TOKEN_REPLY) ? challenge1 : challenge2;
     if (memcmp (relation->lchallenge->value, lc->value._buffer, sizeof (AuthenticationChallenge)) != 0)
       return set_exception (ex, "process_handshake: HandshakeMessageToken property challenge1 does not match future_challenge");
-
-    if (PLUGIN_DEBUG){
-      if (token_type == HS_TOKEN_REPLY){ 
-        if (num_elements == 13){
-          DDS_Security_BinaryProperty_t hash_c1_val = {
-          .name = DDS_AUTHTOKEN_PROP_HASH_C1, .value = { ._length = sizeof (handshake->hash_c1), ._buffer = handshake->hash_c1 }
-          };
-          DDS_Security_BinaryProperty_t hash_c2_val = {
-          .name = DDS_AUTHTOKEN_PROP_HASH_C2, .value = { ._length = sizeof (handshake->hash_c2), ._buffer = handshake->hash_c2 }
-          };
-          const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE_OPT] = { &hash_c2_val, challenge2, kem_ciphertext, challenge1, kem_pub, &hash_c1_val };
-          if (validate_pq_signature(binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE_OPT, sign_public_key, signature_kem, relation->remoteIdentity->dsignAlgoKind) != DDS_SECURITY_VALIDATION_OK)
-          {
-            return set_exception (ex, "reply signature validation1 failed");
-          } 
-        }
-        else{
-          const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE] = { challenge2, kem_ciphertext, challenge1, kem_pub };
-          if (validate_pq_signature(binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE, sign_public_key, signature_kem, relation->remoteIdentity->dsignAlgoKind) != DDS_SECURITY_VALIDATION_OK){
-            return set_exception (ex, "reply signature validation2 failed");
-          } 
-        }
-      }
-      else{
-        if (num_elements == 8){
-          DDS_Security_BinaryProperty_t hash_c1_val = {
-          .name = DDS_AUTHTOKEN_PROP_HASH_C1, .value = { ._length = sizeof (handshake->hash_c1), ._buffer = handshake->hash_c1 }
-          };
-          DDS_Security_BinaryProperty_t hash_c2_val = {
-          .name = DDS_AUTHTOKEN_PROP_HASH_C2, .value = { ._length = sizeof (handshake->hash_c2), ._buffer = handshake->hash_c2 }
-          };
-          const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE_OPT] = { &hash_c1_val, challenge1, kem_pub, challenge2, kem_ciphertext, &hash_c2_val };
-          if (validate_pq_signature(binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE_OPT, sign_public_key, signature_kem, relation->remoteIdentity->dsignAlgoKind) != DDS_SECURITY_VALIDATION_OK){
-            return set_exception (ex, "reply signature validation3 failed");
-          }
-        }
-        else{
-          const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE] = { challenge1, kem_pub, challenge2, kem_ciphertext };
-          if (validate_pq_signature(binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE, sign_public_key, signature_kem, relation->remoteIdentity->dsignAlgoKind) != DDS_SECURITY_VALIDATION_OK){
-            return set_exception (ex, "reply signature validation4 failed");
-          } 
-        }
-      }
-    }
-    else{
-      EVP_PKEY *public_key;
-      if ((public_key = X509_get_pubkey (relation->remoteIdentity->identityCert)) == NULL)
-        return set_exception (ex, "X509_get_pubkey failed");
-      DDS_Security_ValidationResult_t result; 
-      
-      if (token_type == HS_TOKEN_REPLY){ 
-        if (num_elements == 12){
-          DDS_Security_BinaryProperty_t hash_c1_val = {
-          .name = DDS_AUTHTOKEN_PROP_HASH_C1, .value = { ._length = sizeof (handshake->hash_c1), ._buffer = handshake->hash_c1 }
-          };
-          DDS_Security_BinaryProperty_t hash_c2_val = {
-          .name = DDS_AUTHTOKEN_PROP_HASH_C2, .value = { ._length = sizeof (handshake->hash_c2), ._buffer = handshake->hash_c2 }
-          };
-          result = validate_signature (public_key, (const DDS_Security_BinaryProperty_t *[]) {
-          &hash_c2_val, challenge2, dh2, challenge1, dh1, &hash_c1_val }, 6, signature->value._buffer, signature->value._length, ex);
-        }
-        else{
-          result = validate_signature (public_key, (const DDS_Security_BinaryProperty_t *[]) {
-          challenge2, dh2, challenge1}, 3, signature->value._buffer, signature->value._length, ex); 
-        }
-      }
-      else{
-        if (num_elements == 7){
-          DDS_Security_BinaryProperty_t hash_c1_val = {
-          .name = DDS_AUTHTOKEN_PROP_HASH_C1, .value = { ._length = sizeof (handshake->hash_c1), ._buffer = handshake->hash_c1 }
-          };
-          DDS_Security_BinaryProperty_t hash_c2_val = {
-          .name = DDS_AUTHTOKEN_PROP_HASH_C2, .value = { ._length = sizeof (handshake->hash_c2), ._buffer = handshake->hash_c2 }
-          };
-          result = validate_signature (public_key, (const DDS_Security_BinaryProperty_t *[]) {
-          &hash_c1_val, challenge1, dh1, challenge2, dh2, &hash_c2_val }, 6, signature->value._buffer, signature->value._length, ex);
-        }
-        else{
-           result = validate_signature (public_key, (const DDS_Security_BinaryProperty_t *[]) {
-           challenge1, challenge2}, 2, signature->value._buffer, signature->value._length, ex);
-        }
-      }
-      EVP_PKEY_free (public_key);
-      if (result != DDS_SECURITY_VALIDATION_OK)
-        return result;
-    }
   }
+
+  if (token_type == HS_TOKEN_REQ || token_type == HS_TOKEN_REPLY)
+  {
+    assert (dsignAlgoKind != AUTH_ALGO_KIND_UNKNOWN);
+    assert (kagreeAlgoKind != AUTH_ALGO_KIND_UNKNOWN);
+    assert (c_pdata != NULL);
+
+    relation->remoteIdentity->dsignAlgoKind = dsignAlgoKind;
+    relation->remoteIdentity->kagreeAlgoKind = kagreeAlgoKind;
+    DDS_Security_OctetSeq_copy (&relation->remoteIdentity->pdata, &c_pdata->value);
+  }
+
+  if (token_type == HS_TOKEN_REPLY || token_type == HS_TOKEN_FINAL)
+  {
+    EVP_PKEY *public_key;
+    if ((public_key = X509_get_pubkey (relation->remoteIdentity->identityCert)) == NULL)
+      return set_exception (ex, "X509_get_pubkey failed");
+
+    DDS_Security_BinaryProperty_t hash_c1_val = {
+      .name = DDS_AUTHTOKEN_PROP_HASH_C1, .value = { ._length = sizeof (handshake->hash_c1), ._buffer = handshake->hash_c1 }
+    };
+    DDS_Security_BinaryProperty_t hash_c2_val = {
+      .name = DDS_AUTHTOKEN_PROP_HASH_C2, .value = { ._length = sizeof (handshake->hash_c2), ._buffer = handshake->hash_c2 }
+    };
+    DDS_Security_ValidationResult_t result;
+
+    if (token_type == HS_TOKEN_REPLY){ //Sustitute
+      result = validate_signature (public_key, (const DDS_Security_BinaryProperty_t *[]) {
+        &hash_c2_val, challenge2, dh2, challenge1, dh1, &hash_c1_val }, 6, signature->value._buffer, signature->value._length, ex);
+      
+      const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE] = {&hash_c2_val, challenge2, kem_ciphertext, challenge1, kem_pub, &hash_c1_val };
+  
+      unsigned char *buffer;
+      size_t size;
+      DDS_Security_Serializer serializer = DDS_Security_Serializer_new(4096, 4096);
+      DDS_Security_Serialize_BinaryPropertyArray(serializer, binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE);
+      DDS_Security_Serializer_buffer(serializer, &buffer, &size);
+
+      size_t message_len = size;
+      uint8_t *message = (uint8_t *)malloc(size * sizeof(uint8_t));
+
+      for (size_t i = 0; i < message_len; i++) {
+          message[i] = (uint8_t) buffer[i]; 
+      }
+      ddsrt_free(buffer);
+      DDS_Security_Serializer_free(serializer);
+      OQS_STATUS rc;
+      rc = OQS_SIG_dilithium_3_verify(message, message_len, signature_kem->value._buffer, signature_kem->value._length/sizeof(uint8_t), sign_public_key->value._buffer);
+      if (rc != OQS_SUCCESS) {
+        return set_exception (ex, "Signature KEM validation failed");
+      }
+    }
+
+    else{ //final message
+      result = validate_signature (public_key, (const DDS_Security_BinaryProperty_t *[]) {
+        &hash_c1_val, challenge1, dh1, challenge2, dh2, &hash_c2_val }, 6, signature->value._buffer, signature->value._length, ex);
+
+      const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE] = {&hash_c1_val, challenge1, kem_pub, challenge2, kem_ciphertext, &hash_c2_val };
+  
+      unsigned char *buffer;
+      size_t size;
+      DDS_Security_Serializer serializer = DDS_Security_Serializer_new(4096, 4096);
+      DDS_Security_Serialize_BinaryPropertyArray(serializer, binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE);
+      DDS_Security_Serializer_buffer(serializer, &buffer, &size);
+
+      size_t message_len = size;
+      uint8_t *message = (uint8_t *)malloc(size * sizeof(uint8_t));
+
+      for (size_t i = 0; i < message_len; i++) {
+          message[i] = (uint8_t) buffer[i]; 
+      }
+      ddsrt_free(buffer);
+      DDS_Security_Serializer_free(serializer);
+      OQS_STATUS rc;
+      rc = OQS_SIG_dilithium_3_verify(message, message_len, signature_kem->value._buffer, signature_kem->value._length/sizeof(uint8_t), sign_public_key->value._buffer);
+      if (rc != OQS_SUCCESS) {
+        return set_exception (ex, "Signature KEM validation failed");
+      }
+    }
+
+    EVP_PKEY_free (public_key);
+    if (result != DDS_SECURITY_VALIDATION_OK)
+      return result;
+  }
+
   return DDS_SECURITY_VALIDATION_OK;
 }
 
@@ -1777,9 +1814,9 @@ static DDS_Security_ValidationResult_t validate_handshake_token(const DDS_Securi
         relation->remoteIdentity->identityCert = NULL;
       }
 
-      if (handshake->rdh) 
+      if (handshake->rdh) //Sustitute kem_public
       {
-        EVP_PKEY_free (handshake->rdh); 
+        EVP_PKEY_free (handshake->rdh); //Sustitute
         handshake->rdh = NULL;
       }
     }
@@ -1793,12 +1830,10 @@ DDS_Security_ValidationResult_t begin_handshake_reply(dds_security_authenticatio
     const DDS_Security_IdentityHandle initiator_identity_handle, const DDS_Security_IdentityHandle replier_identity_handle,
     const DDS_Security_OctetSeq *serialized_local_participant_data, DDS_Security_SecurityException *ex)
   {
-  if (PLUGIN_DEBUG) {
-  printf("CUSTOM PLUGIN: PQ begin_handshake_reply()\n");
-  }
-  else{
+
+    if (PLUGIN_DEBUG) {
     printf("CUSTOM PLUGIN: begin_handshake_reply()\n");
-  }
+    }
 
   if (!instance || !handshake_handle || !handshake_message_out || !handshake_message_in || !serialized_local_participant_data)
   {
@@ -1817,23 +1852,11 @@ DDS_Security_ValidationResult_t begin_handshake_reply(dds_security_authenticatio
   SecurityObject *obj;
   LocalIdentityInfo *localIdent;
   RemoteIdentityInfo *remoteIdent;
-  uint32_t tokcount; 
+  EVP_PKEY *dhkeyLocal = NULL; //Sustitute
+  unsigned char *certData, *dhPubKeyData; //Sustitute
+  uint32_t certDataSize, dhPubKeyDataSize; //Sustitute
+  uint32_t tokcount = impl->include_optional ? 16 : 13; // 12:9 previous value. We add ciphertext + sign public key + kem public key + signature antiguo
   int created = 0;
-  /*DH*/
-  EVP_PKEY *dhkeyLocal = NULL; 
-  unsigned char *certData, *dhPubKeyData; 
-  uint32_t certDataSize, dhPubKeyDataSize; 
-  /*PQ*/
-  const DDS_Security_BinaryProperty_t *binary_property_kem_public;
-  uint8_t *kem_ciphertext;
-  uint8_t *kem_secret;
-  
-  if (PLUGIN_DEBUG){
-    tokcount = impl->include_optional ?  13 : 11; //We add ciphertext + sign public key + kem public key + signature 
-  } 
-  else{
-    tokcount = impl->include_optional ? 12 : 9;
-  }
 
   ddsrt_mutex_lock(&impl->lock);
 
@@ -1853,7 +1876,7 @@ DDS_Security_ValidationResult_t begin_handshake_reply(dds_security_authenticatio
   }
   remoteIdent = (RemoteIdentityInfo *)obj;
 
-  //replier is the local identity
+  //It is going to look for a handshake where the one sending the reply=replier is the local identity
   if (!(handshake = find_handshake(impl, SECURITY_OBJECT_HANDLE(localIdent), SECURITY_OBJECT_HANDLE(remoteIdent))))
   {
     relation = find_identity_relation(remoteIdent, SECURITY_OBJECT_HANDLE(localIdent));
@@ -1873,12 +1896,53 @@ DDS_Security_ValidationResult_t begin_handshake_reply(dds_security_authenticatio
     goto err_inv_token;
   if (get_certificate_contents(localIdent->identityCert, &certData, &certDataSize, ex) != DDS_SECURITY_VALIDATION_OK)
     goto err_alloc_cid;
+
   
+  if (!handshake->ldh) //Sustitute
+  {
+    if (generate_dh_keys(&dhkeyLocal, remoteIdent->kagreeAlgoKind, ex) != DDS_SECURITY_VALIDATION_OK)
+      goto err_gen_dh_keys;
+
+    handshake->ldh = dhkeyLocal;
+    EVP_PKEY_copy_parameters(handshake->rdh, handshake->ldh);
+  }
+
+  const DDS_Security_BinaryProperty_t *binary_property_kem_public;
+  uint8_t *kem_ciphertext;
+  uint8_t *kem_secret;
+
+  //ciphertext and shared secret generation (Encapsulate)  
+  if (!handshake->kem_ciphertext || !localIdent->kem_secret){
+    binary_property_kem_public = DDS_Security_DataHolder_find_binary_property(handshake_message_in, DDS_AUTHTOKEN_PROP_KEM_PUBLIC);
+    if (binary_property_kem_public == NULL){
+      printf("Error when obtaining kem public binary property from token");
+    }
+    //check the pq algorithm. Kyber 768 for the moment
+    kem_ciphertext = malloc(OQS_KEM_kyber_768_length_ciphertext * sizeof(uint8_t));
+    kem_secret = malloc(OQS_KEM_kyber_768_length_shared_secret * sizeof(uint8_t));
+    //uint8_t kem_ciphertext[OQS_KEM_kyber_768_length_ciphertext];
+    //uint8_t kem_secret[OQS_KEM_kyber_768_length_shared_secret];
+
+    OQS_STATUS rc = OQS_KEM_kyber_768_encaps(kem_ciphertext, kem_secret, binary_property_kem_public->value._buffer);
+    if (rc != OQS_SUCCESS) {
+      goto err_encap_kem_key;
+    }
+
+    handshake->kem_ciphertext = malloc(OQS_KEM_kyber_768_length_ciphertext * sizeof(uint8_t));
+    memcpy(handshake->kem_ciphertext, kem_ciphertext, OQS_KEM_kyber_768_length_ciphertext);
+    localIdent->kem_secret = malloc(OQS_KEM_kyber_768_length_shared_secret * sizeof(uint8_t));
+    memcpy(localIdent->kem_secret, kem_secret, OQS_KEM_kyber_768_length_shared_secret);
+  }
+
+  if (dh_public_key_to_oct(handshake->ldh, remoteIdent->kagreeAlgoKind, &dhPubKeyData, &dhPubKeyDataSize, ex) != DDS_SECURITY_VALIDATION_OK)
+    goto err_get_public_key;
+
   if (localIdent->pdata._length == 0)
     DDS_Security_OctetSeq_copy(&localIdent->pdata, serialized_local_participant_data);
 
   DDS_Security_BinaryProperty_t *tokens = DDS_Security_BinaryPropertySeq_allocbuf(tokcount);
   uint32_t tokidx = 0;
+
 
   /* Store the Identity Certificate associated with the local identify in c.id property */
   DDS_Security_BinaryProperty_set_by_ref(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_C_ID, certData, certDataSize);
@@ -1892,105 +1956,95 @@ DDS_Security_ValidationResult_t begin_handshake_reply(dds_security_authenticatio
   DDS_Security_BinaryPropertySeq bseq = { ._length = 5, ._buffer = tokens };
   get_hash_binary_property_seq(&bseq, handshake->hash_c2);
 
+  /* Set the DH public key associated with the local participant in dh2 property */ //Sustitute
+  DDS_Security_BinaryProperty_t *dh2 = &tokens[tokidx++];
+  DDS_Security_BinaryProperty_set_by_ref(dh2, DDS_AUTHTOKEN_PROP_DH2, dhPubKeyData, dhPubKeyDataSize);
+
+  /* Set the ciphertext associated with the encapsulate process in a property */
+  DDS_Security_BinaryProperty_t *ciphertext = &tokens[tokidx++];
+  DDS_Security_BinaryProperty_set_by_value(ciphertext, DDS_AUTHTOKEN_PROP_KEM_CIPHERTEXT, kem_ciphertext, OQS_KEM_kyber_768_length_ciphertext * sizeof(uint8_t));
+
+  /* Find the dh1 property from the received request token */  //Sustitute
+  const DDS_Security_BinaryProperty_t *dh1 = DDS_Security_DataHolder_find_binary_property(handshake_message_in, DDS_AUTHTOKEN_PROP_DH1);
+  assert(dh1);
+
+  DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_KEM_PUBLIC, binary_property_kem_public->value._buffer, binary_property_kem_public->value._length);
+
   assert(relation->rchallenge);
   DDS_Security_BinaryProperty_t *challenge1 = &tokens[tokidx++];
   DDS_Security_BinaryProperty_set_by_value(challenge1, DDS_AUTHTOKEN_PROP_CHALLENGE1, relation->rchallenge->value, sizeof(AuthenticationChallenge));
   assert(relation->lchallenge);
   DDS_Security_BinaryProperty_t *challenge2 = &tokens[tokidx++];
   DDS_Security_BinaryProperty_set_by_value(challenge2, DDS_AUTHTOKEN_PROP_CHALLENGE2, relation->lchallenge->value, sizeof(AuthenticationChallenge));
-
-  /* THe hash_c1 and hash_c2 are optional */
+  
+  /* THe dh1 and hash_c1 and hash_c2 are optional */
   if (impl->include_optional)
-  { 
+  {
+    DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_DH1, dh1->value._buffer, dh1->value._length); //Sustitute
     DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_HASH_C2, handshake->hash_c2, sizeof(HashValue_t));
     DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_HASH_C1, handshake->hash_c1, sizeof(HashValue_t));
   }
-  
-  if (!PLUGIN_DEBUG){
-    if (!handshake->ldh){ /*DH key generation*/
-      if (generate_dh_keys(&dhkeyLocal, remoteIdent->kagreeAlgoKind, ex) != DDS_SECURITY_VALIDATION_OK)
-        goto err_gen_dh_keys;
-      handshake->ldh = dhkeyLocal;
-      EVP_PKEY_copy_parameters(handshake->rdh, handshake->ldh);
-    }
-    if (dh_public_key_to_oct(handshake->ldh, remoteIdent->kagreeAlgoKind, &dhPubKeyData, &dhPubKeyDataSize, ex) != DDS_SECURITY_VALIDATION_OK)
-      goto err_get_public_key;
 
-    /* Set the DH public key associated with the local participant in dh2 property */ 
-    DDS_Security_BinaryProperty_t *dh2 = &tokens[tokidx++];
-    DDS_Security_BinaryProperty_set_by_ref(dh2, DDS_AUTHTOKEN_PROP_DH2, dhPubKeyData, dhPubKeyDataSize);
-    /* Find the dh1 property from the received request token */  
-    const DDS_Security_BinaryProperty_t *dh1 = DDS_Security_DataHolder_find_binary_property(handshake_message_in, DDS_AUTHTOKEN_PROP_DH1);
-    assert(dh1);
-    /* THe dh1 is also optional */
-    if (impl->include_optional){
-      DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_DH1, dh1->value._buffer, dh1->value._length); 
-    }
-
-    /* Calculate the signature */
+  /* Calculate the signature */ //Sustitute
+  {
     unsigned char *sign;
     size_t signlen;
-    DDS_Security_ValidationResult_t result;
-     if (impl->include_optional){
-      DDS_Security_BinaryProperty_t *hash_c1_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C1, handshake->hash_c1);
-      DDS_Security_BinaryProperty_t *hash_c2_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C2, handshake->hash_c2);
-      const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE_OPT] = { hash_c2_val, challenge2, dh2, challenge1, dh1, hash_c1_val };
-      result = create_signature(localIdent->privateKey, binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE_OPT, &sign, &signlen, ex);
-      DDS_Security_BinaryProperty_free(hash_c1_val);
-      DDS_Security_BinaryProperty_free(hash_c2_val);
-    }
-    else{
-      const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE] = {challenge2, dh2, challenge1};
-      result = create_signature(localIdent->privateKey, binary_properties, 3, &sign, &signlen, ex);
-    }
+    DDS_Security_BinaryProperty_t *hash_c1_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C1, handshake->hash_c1);
+    DDS_Security_BinaryProperty_t *hash_c2_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C2, handshake->hash_c2);
+    const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE] = { hash_c2_val, challenge2, dh2, challenge1, dh1, hash_c1_val };
+    DDS_Security_ValidationResult_t result = create_signature(localIdent->privateKey, binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE, &sign, &signlen, ex);
+    DDS_Security_BinaryProperty_free(hash_c1_val);
+    DDS_Security_BinaryProperty_free(hash_c2_val);
     if (result != DDS_SECURITY_VALIDATION_OK)
       goto err_signature;
     DDS_Security_BinaryProperty_set_by_ref(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_SIGNATURE, sign, (uint32_t)signlen);
   }
-  else{ /* PQ */
-    /* ciphertext and shared secret generation (Encapsulate) */
-    if (!handshake->kem_ciphertext || !localIdent->kem_secret){
-      binary_property_kem_public = DDS_Security_DataHolder_find_binary_property(handshake_message_in, DDS_AUTHTOKEN_PROP_KEM_PUBLIC);
-      if (binary_property_kem_public == NULL){
-        return DDS_SECURITY_VALIDATION_FAILED;}
-      size_t length_ciphertext;
-      size_t length_secret;
-      encapsulate_kem_key(&kem_ciphertext, &kem_secret, &length_ciphertext, &length_secret, binary_property_kem_public, remoteIdent->kagreeAlgoKind);
-      handshake->kem_ciphertext = malloc(length_ciphertext * sizeof(uint8_t));
-      memcpy(handshake->kem_ciphertext, kem_ciphertext, length_ciphertext);
-      localIdent->kem_secret = malloc(length_secret * sizeof(uint8_t));
-      memcpy(localIdent->kem_secret, kem_secret, length_secret);
-    }
-    
-    /* Set the previous public key and the ciphertext associated with the encapsulate process in a property */
-    DDS_Security_BinaryProperty_t *ciphertext = &tokens[tokidx++];
-    DDS_Security_BinaryProperty_set_by_value(ciphertext, DDS_AUTHTOKEN_PROP_KEM_CIPHERTEXT, kem_ciphertext, OQS_KEM_kyber_768_length_ciphertext * sizeof(uint8_t));
-    DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_KEM_PUBLIC, binary_property_kem_public->value._buffer, binary_property_kem_public->value._length);
 
-    /*Calculate the signature*/
-    uint8_t *sign_public_key;
-    uint8_t *kem_signature;
-    size_t sign_public_key_len;
-    size_t kem_signature_len;
-   
-    if (impl->include_optional){
-      DDS_Security_BinaryProperty_t *hash_c1_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C1, handshake->hash_c1);
-      DDS_Security_BinaryProperty_t *hash_c2_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C2, handshake->hash_c2);
-      const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE_OPT] = {hash_c2_val, challenge2, ciphertext, challenge1, binary_property_kem_public, hash_c1_val };
-      if (create_pq_signature(binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE_OPT, &sign_public_key, &kem_signature, &sign_public_key_len, &kem_signature_len, remoteIdent->dsignAlgoKind) != DDS_SECURITY_VALIDATION_OK){
-        goto err_kem_signature;}
-      DDS_Security_BinaryProperty_free(hash_c1_val);
-      DDS_Security_BinaryProperty_free(hash_c2_val); 
-    }
-    else{
-      const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE] = { challenge2, ciphertext, challenge1, binary_property_kem_public };
-      if (create_pq_signature(binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE, &sign_public_key, &kem_signature, &sign_public_key_len, &kem_signature_len, remoteIdent->dsignAlgoKind) != DDS_SECURITY_VALIDATION_OK){
-        goto err_kem_signature;} 
-    }
-   
-    DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_SIGNATURE_PUBLIC_KEY, sign_public_key, OQS_SIG_dilithium_3_length_public_key * sizeof(uint8_t));
-    DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_KEM_SIGNATURE, kem_signature, kem_signature_len * sizeof(uint8_t));
+  OQS_STATUS rc;
+	uint8_t sign_public_key[OQS_SIG_dilithium_3_length_public_key];
+	uint8_t sign_secret_key[OQS_SIG_dilithium_3_length_secret_key];
+	uint8_t kem_signature[OQS_SIG_dilithium_3_length_signature];
+	size_t kem_signature_len;
+ 
+  DDS_Security_BinaryProperty_t *hash_c1_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C1, handshake->hash_c1);
+  DDS_Security_BinaryProperty_t *hash_c2_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C2, handshake->hash_c2);
+
+  const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE] = {hash_c2_val, challenge2, ciphertext, challenge1, binary_property_kem_public, hash_c1_val };
+  
+  unsigned char *buffer;
+  size_t size;
+  DDS_Security_Serializer serializer = DDS_Security_Serializer_new(4096, 4096);
+  DDS_Security_Serialize_BinaryPropertyArray(serializer, binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE);
+  DDS_Security_Serializer_buffer(serializer, &buffer, &size);
+
+  size_t message_len = size;
+  uint8_t *message = (uint8_t *)malloc(size * sizeof(uint8_t));
+
+  for (size_t i = 0; i < message_len; i++) {
+      message[i] = (uint8_t) buffer[i]; 
   }
+  ddsrt_free(buffer);
+  DDS_Security_Serializer_free(serializer);
+
+	rc = OQS_SIG_dilithium_3_keypair(sign_public_key, sign_secret_key);
+	if (rc != OQS_SUCCESS) {
+		goto err_gen_keypair_signature;
+	}
+	rc = OQS_SIG_dilithium_3_sign(kem_signature, &kem_signature_len, message, message_len, sign_secret_key);
+	if (rc != OQS_SUCCESS) {
+		goto err_kem_signature;
+	}
+  /*printf("\nSignature:\n");
+  for (size_t i = 0; i < kem_signature_len; i++) {
+      printf("%02X ", kem_signature[i]); // Imprime cada byte en formato hexadecimal
+  }*/
+  DDS_Security_BinaryProperty_free(hash_c1_val);
+  DDS_Security_BinaryProperty_free(hash_c2_val);
+  free(message);
+
+  DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_SIGNATURE_PUBLIC_KEY, sign_public_key, OQS_SIG_dilithium_3_length_public_key*sizeof(uint8_t));
+  DDS_Security_BinaryProperty_set_by_value(&tokens[tokidx++], DDS_AUTHTOKEN_PROP_KEM_SIGNATURE, kem_signature, kem_signature_len * sizeof(uint8_t));
+
 
   assert(tokidx == tokcount);
 
@@ -2004,15 +2058,17 @@ DDS_Security_ValidationResult_t begin_handshake_reply(dds_security_authenticatio
   *handshake_handle = HANDSHAKE_HANDLE(handshake);
   return DDS_SECURITY_VALIDATION_PENDING_HANDSHAKE_MESSAGE;
 
+err_gen_keypair_signature:
+  free_binary_properties(tokens, tokcount);
 err_kem_signature:
   free_binary_properties(tokens, tokcount);
 err_signature:
   free_binary_properties(tokens, tokcount);
 err_get_public_key:
-err_gen_dh_keys: 
+err_gen_dh_keys: //Sustitute
   ddsrt_free(certData);
 err_encap_kem_key:
-  ddsrt_free(certData); 
+  ddsrt_free(certData); //Sustitute
 err_alloc_cid:
 err_inv_token:
   if (created)
@@ -2100,14 +2156,6 @@ static bool generate_pq_shared_secret(const HandshakeInfo *handshake, unsigned c
 DDS_Security_ValidationResult_t process_handshake(dds_security_authentication *instance, DDS_Security_HandshakeMessageToken *handshake_message_out,
     const DDS_Security_HandshakeMessageToken *handshake_message_in, const DDS_Security_HandshakeHandle handshake_handle, DDS_Security_SecurityException *ex)
 {
-  if (PLUGIN_DEBUG) {
-    printf("CUSTOM PLUGIN: PQ process handshake()\n");
-  }
-  else{
-    printf("CUSTOM PLUGIN: process handshake()\n");
-  }
-
-
   if (!instance || !handshake_handle || !handshake_message_out || !handshake_message_in)
   {
     DDS_Security_Exception_set(ex, DDS_AUTH_PLUGIN_CONTEXT, DDS_SECURITY_ERR_UNDEFINED_CODE, DDS_SECURITY_VALIDATION_FAILED, "process_handshake: Invalid parameter provided");
@@ -2119,19 +2167,8 @@ DDS_Security_ValidationResult_t process_handshake(dds_security_authentication *i
   HandshakeInfo *handshake = NULL;
   IdentityRelation *relation = NULL;
   SecurityObject *obj;
-  uint32_t tsz;
-  /* DH* */
-  DDS_Security_BinaryProperty_t *dh1_gen = NULL, *dh2_gen = NULL; 
-  const DDS_Security_BinaryProperty_t *dh2;
-  /* PQ */
-  const DDS_Security_BinaryProperty_t *kem_public;
-  const DDS_Security_BinaryProperty_t *kem_ciphertext;
-
-  if (PLUGIN_DEBUG){
-    tsz = impl->include_optional ? 8: 6; /* We add kem_signature + sign public key + kem public */
-  }else{
-    tsz = impl->include_optional ? 7 : 3;
-  }
+  DDS_Security_BinaryProperty_t *dh1_gen = NULL, *dh2_gen = NULL; //Sustitute
+  const uint32_t tsz = impl->include_optional ? 11 : 7; //Sustitute, 7:3 original. We add kem_signature + sign public key + kem public 
   DDS_Security_octet *challenge1_ref_for_shared_secret, *challenge2_ref_for_shared_secret;
 
   memset(handshake_message_out, 0, sizeof(DDS_Security_HandshakeMessageToken));
@@ -2152,37 +2189,41 @@ DDS_Security_ValidationResult_t process_handshake(dds_security_authentication *i
   switch (handshake->created_in)
   {
   case CREATEDREQUEST:
+    if ((dh1_gen = create_dhkey_property(DDS_AUTHTOKEN_PROP_DH1, handshake->ldh, relation->localIdentity->kagreeAlgoKind, ex)) == NULL)
+      goto err_inv_token; //Sustitute  
 
-    if (!PLUGIN_DEBUG){
-      if ((dh1_gen = create_dhkey_property(DDS_AUTHTOKEN_PROP_DH1, handshake->ldh, relation->localIdentity->kagreeAlgoKind, ex)) == NULL){
-        goto err_inv_token;}
-      /* The source of the handshake_handle is a begin_handshake_request function. So, handshake_message_in is from a remote begin_handshake_reply function */
-      /* Verify Message Token contents according to Spec 9.3.2.5.2 (Reply Message)  */
-      if (validate_handshake_token(handshake_message_in, HS_TOKEN_REPLY, handshake, &(impl->trustedCAList), dh1_gen, NULL, ex) != DDS_SECURITY_VALIDATION_OK){
-      goto err_inv_token; }
-      EVP_PKEY_copy_parameters(handshake->rdh, handshake->ldh); 
-      /* Find the dh1 property from the received request token */
-      dh2 = DDS_Security_DataHolder_find_binary_property(handshake_message_in, DDS_AUTHTOKEN_PROP_DH2);
-      assert(dh2); 
-    }
+    /* The source of the handshake_handle is a begin_handshake_request function. So, handshake_message_in is from a remote begin_handshake_reply function */
+    /* Verify Message Token contents according to Spec 9.3.2.5.2 (Reply Message)  */
+    if (validate_handshake_token(handshake_message_in, HS_TOKEN_REPLY, handshake, &(impl->trustedCAList), dh1_gen, NULL, ex) != DDS_SECURITY_VALIDATION_OK)
+      goto err_inv_token;
 
-    if (PLUGIN_DEBUG){
-      /* The source of the handshake_handle is a begin_handshake_request function. So, handshake_message_in is from a remote begin_handshake_reply function */
-      /* Verify Message Token contents according to Spec 9.3.2.5.2 (Reply Message)  */
-      if (validate_handshake_token(handshake_message_in, HS_TOKEN_REPLY, handshake, &(impl->trustedCAList), dh1_gen, NULL, ex) != DDS_SECURITY_VALIDATION_OK){
-        goto err_inv_token;} 
-      /* Decapsulate operation */
-      kem_public = DDS_Security_DataHolder_find_binary_property(handshake_message_in, DDS_AUTHTOKEN_PROP_KEM_PUBLIC);
-      assert(kem_public);
-      kem_ciphertext = DDS_Security_DataHolder_find_binary_property(handshake_message_in, DDS_AUTHTOKEN_PROP_KEM_CIPHERTEXT);
-      assert(kem_ciphertext);  
-      LocalIdentityInfo *localIdent = relation->localIdentity;
-      uint8_t *kem_secret;
-      size_t length_secret;
-      decapsulate_kem_key(&kem_secret, &length_secret, kem_ciphertext, kem_public, localIdent->kem_private, localIdent->kagreeAlgoKind);
-      localIdent->kem_secret = malloc(length_secret * sizeof(uint8_t));
-      memcpy(localIdent->kem_secret, kem_secret, length_secret);
+    EVP_PKEY_copy_parameters(handshake->rdh, handshake->ldh); //Sustitute
+
+    /* Find the dh1 property from the received request token */
+    const DDS_Security_BinaryProperty_t *dh2 = DDS_Security_DataHolder_find_binary_property(handshake_message_in, DDS_AUTHTOKEN_PROP_DH2);
+    assert(dh2); //Sustitute
+
+    /* Decapsulate operation */
+    const DDS_Security_BinaryProperty_t *kem_public = DDS_Security_DataHolder_find_binary_property(handshake_message_in, DDS_AUTHTOKEN_PROP_KEM_PUBLIC);
+    assert(kem_public);
+    const DDS_Security_BinaryProperty_t *kem_ciphertext = DDS_Security_DataHolder_find_binary_property(handshake_message_in, DDS_AUTHTOKEN_PROP_KEM_CIPHERTEXT);
+    assert(kem_ciphertext);  
+    
+	  uint8_t kem_secret[OQS_KEM_kyber_768_length_shared_secret];
+
+    LocalIdentityInfo *localIdent = relation->localIdentity;
+
+    OQS_STATUS rc = OQS_KEM_kyber_768_decaps(kem_secret, kem_ciphertext->value._buffer, localIdent->kem_private); 
+    if (rc != OQS_SUCCESS) {
+      return DDS_SECURITY_VALIDATION_FAILED;
     }
+    /*printf("\nKEM Secret: ");
+    for (size_t i = 0; i < OQS_KEM_kyber_768_length_shared_secret; i++) {
+      printf("%02X ", kem_secret[i]); // Imprime cada byte en formato hexadecimal
+    }
+    printf("\n");*/
+    localIdent->kem_secret = malloc(OQS_KEM_kyber_768_length_shared_secret * sizeof(uint8_t));
+    memcpy(localIdent->kem_secret, kem_secret, OQS_KEM_kyber_768_length_shared_secret);
 
     DDS_Security_BinaryProperty_t *tokens = DDS_Security_BinaryPropertySeq_allocbuf(tsz);
     uint32_t idx = 0;
@@ -2196,63 +2237,74 @@ DDS_Security_ValidationResult_t process_handshake(dds_security_authentication *i
 
     if (impl->include_optional)
     {
-      if (!PLUGIN_DEBUG){
-        DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_DH1, dh1_gen->value._buffer, dh1_gen->value._length); 
-        DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_DH2, dh2->value._buffer, dh2->value._length); 
-      }
+      DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_DH1, dh1_gen->value._buffer, dh1_gen->value._length); //Sustitute
+      DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_DH2, dh2->value._buffer, dh2->value._length); //Sustitute
       DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_HASH_C2, handshake->hash_c2, sizeof(HashValue_t));
       DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_HASH_C1, handshake->hash_c1, sizeof(HashValue_t));
     }
 
-    /* Calculate the signature */ 
-    DDS_Security_BinaryProperty_t *hash_c1_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C1, handshake->hash_c1);
-    DDS_Security_BinaryProperty_t *hash_c2_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C2, handshake->hash_c2);
-
-    if (!PLUGIN_DEBUG)
+    /* Calculate the signature */ //Sustitute
     {
       unsigned char *sign;
       size_t signlen;
-      DDS_Security_ValidationResult_t result;
-      if (impl->include_optional)
-      {
-        const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE_OPT] = { hash_c1_val, challenge1, dh1_gen, challenge2, dh2, hash_c2_val };
-        result = create_signature(relation->localIdentity->privateKey, binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE_OPT, &sign, &signlen, ex);
-      }
-      else{
-        const DDS_Security_BinaryProperty_t *binary_properties[2] = { challenge1, challenge2 };
-        result = create_signature(relation->localIdentity->privateKey, binary_properties, 2, &sign, &signlen, ex);
-      }
+      DDS_Security_BinaryProperty_t *hash_c1_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C1, handshake->hash_c1);
+      DDS_Security_BinaryProperty_t *hash_c2_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C2, handshake->hash_c2);
+      const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE] = { hash_c1_val, challenge1, dh1_gen, challenge2, dh2, hash_c2_val };
+      DDS_Security_ValidationResult_t result = create_signature(relation->localIdentity->privateKey, binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE, &sign, &signlen, ex);
+      DDS_Security_BinaryProperty_free(hash_c1_val);
+      DDS_Security_BinaryProperty_free(hash_c2_val);
       if (result != DDS_SECURITY_VALIDATION_OK)
         goto err_signature;
       DDS_Security_BinaryProperty_set_by_ref(&tokens[idx++], DDS_AUTHTOKEN_PROP_SIGNATURE, sign, (uint32_t)signlen);
-    }else{
-      uint8_t *sign_public_key;
-      uint8_t *kem_signature;
-      size_t sign_public_key_len;
-      size_t kem_signature_len;
-
-      if (impl->include_optional)
-      {
-        const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE_OPT] = { hash_c1_val, challenge1, kem_public, challenge2, kem_ciphertext, hash_c2_val };
-        if (create_pq_signature(binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE_OPT, &sign_public_key, &kem_signature, &sign_public_key_len, &kem_signature_len, relation->localIdentity->dsignAlgoKind) != DDS_SECURITY_VALIDATION_OK){
-          goto err_kem_signature;
-        } 
-      }
-      else{
-        const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE] = {challenge1, kem_public, challenge2, kem_ciphertext};
-        if (create_pq_signature(binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE, &sign_public_key, &kem_signature, &sign_public_key_len, &kem_signature_len, relation->localIdentity->dsignAlgoKind) != DDS_SECURITY_VALIDATION_OK){
-          goto err_kem_signature;
-        } 
-      }
-      
-      DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_KEM_PUBLIC, kem_public->value._buffer, kem_public->value._length);
-      DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_KEM_CIPHERTEXT, kem_ciphertext->value._buffer, kem_ciphertext->value._length);
-      DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_SIGNATURE_PUBLIC_KEY, sign_public_key, OQS_SIG_dilithium_3_length_public_key * sizeof(uint8_t));
-      DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_KEM_SIGNATURE, kem_signature, kem_signature_len * sizeof(uint8_t));
     }
+
+    uint8_t sign_public_key[OQS_SIG_dilithium_3_length_public_key];
+    uint8_t sign_secret_key[OQS_SIG_dilithium_3_length_secret_key];
+    uint8_t kem_signature[OQS_SIG_dilithium_3_length_signature];
+    size_t kem_signature_len;
+  
+    DDS_Security_BinaryProperty_t *hash_c1_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C1, handshake->hash_c1);
+    DDS_Security_BinaryProperty_t *hash_c2_val = hash_value_to_binary_property(DDS_AUTHTOKEN_PROP_HASH_C2, handshake->hash_c2);
+
+    const DDS_Security_BinaryProperty_t *binary_properties[HANDSHAKE_SIGNATURE_CONTENT_SIZE] = { hash_c1_val, challenge1, kem_public, challenge2, kem_ciphertext, hash_c2_val };
     
+    unsigned char *buffer;
+    size_t size;
+    DDS_Security_Serializer serializer = DDS_Security_Serializer_new(4096, 4096);
+    DDS_Security_Serialize_BinaryPropertyArray(serializer, binary_properties, HANDSHAKE_SIGNATURE_CONTENT_SIZE);
+    DDS_Security_Serializer_buffer(serializer, &buffer, &size);
+
+    size_t message_len = size;
+    uint8_t *message = (uint8_t *)malloc(size * sizeof(uint8_t));
+
+    for (size_t i = 0; i < message_len; i++) {
+        message[i] = (uint8_t) buffer[i]; 
+    }
+    ddsrt_free(buffer);
+    DDS_Security_Serializer_free(serializer);  
+
+    rc = OQS_SIG_dilithium_3_keypair(sign_public_key, sign_secret_key);
+    if (rc != OQS_SUCCESS) {
+      free_binary_properties(tokens, tsz);
+      return DDS_SECURITY_VALIDATION_FAILED;
+    }
+    rc = OQS_SIG_dilithium_3_sign(kem_signature, &kem_signature_len, message, message_len, sign_secret_key);
+    if (rc != OQS_SUCCESS) {
+      goto err_signature;
+    }
+
+    /*printf("\nSignature:\n");
+    for (size_t i = 0; i < kem_signature_len; i++) {
+        printf("%02X ", kem_signature[i]); // Imprime cada byte en formato hexadecimal
+    }*/
     DDS_Security_BinaryProperty_free(hash_c1_val);
     DDS_Security_BinaryProperty_free(hash_c2_val);
+    free(message);
+    
+    DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_KEM_PUBLIC, kem_public->value._buffer, kem_public->value._length);
+    DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_KEM_CIPHERTEXT, kem_ciphertext->value._buffer, kem_ciphertext->value._length);
+    DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_SIGNATURE_PUBLIC_KEY, sign_public_key, OQS_SIG_dilithium_3_length_public_key * sizeof(uint8_t));
+    DDS_Security_BinaryProperty_set_by_value(&tokens[idx++], DDS_AUTHTOKEN_PROP_KEM_SIGNATURE, kem_signature, kem_signature_len * sizeof(uint8_t));
 
     handshake_message_out->class_id = ddsrt_strdup(DDS_SECURITY_AUTH_HANDSHAKE_FINAL_TOKEN_ID);
     handshake_message_out->binary_properties._length = tsz;
@@ -2263,16 +2315,14 @@ DDS_Security_ValidationResult_t process_handshake(dds_security_authentication *i
     break;
 
   case CREATEDREPLY:
-    if (!PLUGIN_DEBUG){
-      if ((dh1_gen = create_dhkey_property(DDS_AUTHTOKEN_PROP_DH1, handshake->rdh, relation->remoteIdentity->kagreeAlgoKind, ex)) == NULL)
-        goto err_inv_token; 
-      if ((dh2_gen = create_dhkey_property(DDS_AUTHTOKEN_PROP_DH2, handshake->ldh, relation->remoteIdentity->kagreeAlgoKind, ex)) == NULL)
-        goto err_inv_token;
-    }
+    if ((dh1_gen = create_dhkey_property(DDS_AUTHTOKEN_PROP_DH1, handshake->rdh, relation->remoteIdentity->kagreeAlgoKind, ex)) == NULL)
+      goto err_inv_token; //Sustitute
+    if ((dh2_gen = create_dhkey_property(DDS_AUTHTOKEN_PROP_DH2, handshake->ldh, relation->remoteIdentity->kagreeAlgoKind, ex)) == NULL)
+      goto err_inv_token;//Sustitute
 
     /* The source of the handshake_handle is a begin_handshake_reply function So, handshake_message_in is from a remote process_handshake function */
     /* Verify Message Token contents according to Spec 9.3.2.5.3 (Final Message)   */
-    if (validate_handshake_token(handshake_message_in, HS_TOKEN_FINAL, handshake, NULL, dh1_gen, dh2_gen, ex) != DDS_SECURITY_VALIDATION_OK) 
+    if (validate_handshake_token(handshake_message_in, HS_TOKEN_FINAL, handshake, NULL, dh1_gen, dh2_gen, ex) != DDS_SECURITY_VALIDATION_OK) //Sustitute
       goto err_inv_token;
       
     challenge2_ref_for_shared_secret = (DDS_Security_octet *)(handshake->relation->lchallenge);
@@ -2288,23 +2338,24 @@ DDS_Security_ValidationResult_t process_handshake(dds_security_authentication *i
   { //call the generate shared secret function
     DDS_Security_long shared_secret_length;
     unsigned char *shared_secret;
-    if (!PLUGIN_DEBUG){
-      if (!generate_shared_secret(handshake, &shared_secret, &shared_secret_length, ex)) 
-        goto err_openssl;
-    }else{
-      if (!generate_pq_shared_secret(handshake, &shared_secret, &shared_secret_length)){
-        goto err_openssl;
-      }
-      printf("\nValor de shared_secret: ");
-        for (int i = 0; i < shared_secret_length; ++i) {
-            printf("%02x ", shared_secret[i]);
+    DDS_Security_long kem_shared_secret_length;
+    unsigned char *kem_shared_secret;
+    if (!generate_shared_secret(handshake, &shared_secret, &shared_secret_length, ex)) //Sustitute
+      goto err_openssl;
+    if (!generate_pq_shared_secret(handshake, &kem_shared_secret, &kem_shared_secret_length)) //Sustitute
+      goto err_openssl;
+    
+    printf("\nValor de shared_secret: ");
+        for (int i = 0; i < kem_shared_secret_length; ++i) {
+            printf("%02x ", kem_shared_secret[i]);
         }
-      printf("\n");
-    }
+    printf("\n");
       
     handshake->shared_secret_handle_impl = ddsrt_malloc(sizeof(DDS_Security_SharedSecretHandleImpl));
     handshake->shared_secret_handle_impl->shared_secret = shared_secret;
+    //handshake->shared_secret_handle_impl->shared_secret = kem_shared_secret;
     handshake->shared_secret_handle_impl->shared_secret_size = shared_secret_length;
+    //handshake->shared_secret_handle_impl->shared_secret_size = kem_shared_secret_length;
     memcpy(handshake->shared_secret_handle_impl->challenge1, challenge1_ref_for_shared_secret, DDS_SECURITY_AUTHENTICATION_CHALLENGE_SIZE);
     memcpy(handshake->shared_secret_handle_impl->challenge2, challenge2_ref_for_shared_secret, DDS_SECURITY_AUTHENTICATION_CHALLENGE_SIZE);
   }
@@ -2333,15 +2384,12 @@ err_invalid_expiry:
   ddsrt_free(handshake->shared_secret_handle_impl);
   handshake->shared_secret_handle_impl = NULL;
 err_openssl:
-err_kem_signature:
-  if (handshake_message_out->class_id)
-    DDS_Security_DataHolder_deinit(handshake_message_out);
 err_signature:
   if (handshake_message_out->class_id)
     DDS_Security_DataHolder_deinit(handshake_message_out);
 err_inv_token:
-  DDS_Security_BinaryProperty_free(dh1_gen); 
-  DDS_Security_BinaryProperty_free(dh2_gen); 
+  DDS_Security_BinaryProperty_free(dh1_gen); //Sustitute
+  DDS_Security_BinaryProperty_free(dh2_gen); //Sustitute
 err_inv_handle:
   ddsrt_mutex_unlock(&impl->lock);
 err_bad_param:

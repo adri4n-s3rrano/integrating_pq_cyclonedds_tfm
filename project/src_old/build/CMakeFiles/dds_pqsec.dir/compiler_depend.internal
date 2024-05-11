@@ -52,7 +52,6 @@ CMakeFiles/dds_pqsec.dir/auth_utils.c.o
  /opt/cyclonedds/include/dds/ddsrt/types/posix.h
  /opt/cyclonedds/include/dds/export.h
  /opt/cyclonedds/include/dds/features.h
- /opt/cyclonedds/include/dds/security/core/dds_security_serialize.h
  /opt/cyclonedds/include/dds/security/core/dds_security_types.h
  /opt/cyclonedds/include/dds/security/core/dds_security_utils.h
  /opt/cyclonedds/include/dds/security/dds_security_api.h
