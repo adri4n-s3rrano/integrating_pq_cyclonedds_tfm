@@ -157,7 +157,6 @@ CMakeFiles/dds_pqsec.dir/auth_utils.c.o: \
  /opt/cyclonedds/include/dds/security/dds_security_api_types.h \
  /opt/cyclonedds/include/dds/security/dds_security_api_authentication.h \
  /opt/cyclonedds/include/dds/security/dds_security_api_cryptography.h \
- /opt/cyclonedds/include/dds/security/core/dds_security_serialize.h \
  /home/adrian/project/src/openssl/include/dds/security/openssl_support.h \
  /usr/include/openssl/opensslv.h /usr/include/openssl/macros.h \
  /usr/include/x86_64-linux-gnu/openssl/opensslconf.h \

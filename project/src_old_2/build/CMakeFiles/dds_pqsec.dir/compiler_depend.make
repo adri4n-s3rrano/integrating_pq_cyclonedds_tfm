@@ -51,7 +51,6 @@ CMakeFiles/dds_pqsec.dir/auth_utils.c.o: /home/adrian/project/src/auth_utils.c \
   /opt/cyclonedds/include/dds/ddsrt/types/posix.h \
   /opt/cyclonedds/include/dds/export.h \
   /opt/cyclonedds/include/dds/features.h \
-  /opt/cyclonedds/include/dds/security/core/dds_security_serialize.h \
   /opt/cyclonedds/include/dds/security/core/dds_security_types.h \
   /opt/cyclonedds/include/dds/security/core/dds_security_utils.h \
   /opt/cyclonedds/include/dds/security/dds_security_api.h \
@@ -757,6 +756,8 @@ CMakeFiles/dds_pqsec.dir/openssl/src/openssl_support.c.o: /home/adrian/project/s
 
 /opt/cyclonedds/include/dds/security/core/dds_security_timed_cb.h:
 
+/opt/cyclonedds/include/dds/security/core/dds_security_serialize.h:
+
 /opt/cyclonedds/include/dds/ddsrt/hopscotch.h:
 
 /opt/cyclonedds/include/dds/ddsi/ddsi_xevent.h:
@@ -802,8 +803,6 @@ CMakeFiles/dds_pqsec.dir/openssl/src/openssl_support.c.o: /home/adrian/project/s
 /opt/cyclonedds/include/dds/security/dds_security_api.h:
 
 /opt/liboqs/include/oqs/common.h:
-
-/opt/cyclonedds/include/dds/security/core/dds_security_serialize.h:
 
 /usr/include/openssl/rsa.h:
 
@@ -889,16 +888,6 @@ CMakeFiles/dds_pqsec.dir/openssl/src/openssl_support.c.o: /home/adrian/project/s
 
 /opt/cyclonedds/include/dds/config.h:
 
-/usr/include/x86_64-linux-gnu/bits/struct_stat.h:
-
-/opt/liboqs/include/oqs/kem_bike.h:
-
-/opt/cyclonedds/include/dds/security/dds_security_api_types.h:
-
-/opt/cyclonedds/include/dds/security/dds_security_api_cryptography.h:
-
-/opt/cyclonedds/include/dds/ddsrt/atomics.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
 
 /usr/include/netinet/in.h:
@@ -952,6 +941,12 @@ CMakeFiles/dds_pqsec.dir/openssl/src/openssl_support.c.o: /home/adrian/project/s
 /usr/include/openssl/x509_vfy.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+
+/opt/cyclonedds/include/dds/security/dds_security_api_cryptography.h:
+
+/opt/cyclonedds/include/dds/ddsrt/atomics.h:
+
+/opt/cyclonedds/include/dds/security/dds_security_api_types.h:
 
 /opt/cyclonedds/include/dds/ddsi/ddsi_sockwaitset.h:
 
@@ -1084,6 +1079,10 @@ CMakeFiles/dds_pqsec.dir/openssl/src/openssl_support.c.o: /home/adrian/project/s
 /usr/include/stdio.h:
 
 /usr/include/openssl/hmac.h:
+
+/usr/include/x86_64-linux-gnu/bits/struct_stat.h:
+
+/opt/liboqs/include/oqs/kem_bike.h:
 
 /opt/liboqs/include/oqs/sig_falcon.h:
 
