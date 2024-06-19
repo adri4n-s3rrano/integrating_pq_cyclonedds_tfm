@@ -1,3 +1,6 @@
+# Integrating Post Quantum Cryptography on a CycloneDDS Communication
+# Author: Adrian Serrano Navarro
+
 import subprocess
 import threading
 import statistics
@@ -7,12 +10,17 @@ import statistics
 publisher_program = "/home/adrian/project/cyclonedds/build/bin/HelloworldPublisher"
 consumer_program = "/home/adrian/project/cyclonedds/build/bin/HelloworldSubscriber"
 
+# file to store the results
+target_file = 'output.csv'
+
 # Calculate the execution time
-def run_program(program, times):
+def run_program(program, times, index):
     process = subprocess.Popen(["time", "-p", program], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     process.wait()
     real_time = process.communicate()[1].decode().splitlines()[0].split()[1]
     times.append(float(real_time))
+    with open(target_file, 'a') as file:
+        file.write(f'{index},{real_time}\n')
 
 # time storage
 times = []
@@ -20,10 +28,8 @@ times = []
 # 100 tests performed
 threads = []
 for i in range(100):
-    print(f"Running test {i+1}")
-    # Crear y ejecutar los subprocesos simultáneamente
-    publisher_thread = threading.Thread(target=run_program, args=(publisher_program, times))
-    consumer_thread = threading.Thread(target=run_program, args=(consumer_program, times))
+    publisher_thread = threading.Thread(target=run_program, args=(publisher_program, times, i))
+    consumer_thread = threading.Thread(target=run_program, args=(consumer_program, times, i))
     publisher_thread.start()
     consumer_thread.start()
     threads.append(publisher_thread)

@@ -1,4 +1,4 @@
-// Copyright(c) 2006 to 2020 ZettaScale Technology and others
+// Copyright(c) 2006 to 2021 ZettaScale Technology and others
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -7,6 +7,11 @@
 // http://www.eclipse.org/org/documents/edl-v10.php.
 //
 // SPDX-License-Identifier: EPL-2.0 OR BSD-3-Clause
+//
+// KYBER768 KEM integration and Dilithium3 signature via liboqs:
+// Copyright (C) 2023 Adrián Serrano Navarro (@100429115)
+// as a part of the Master Thesis "Integrating post quantum criptography on a publisher-consumer communication over CycloneDDS"
+// see README.md for details
 
 #ifndef SECURITY_BUILTIN_PLUGINS_AUTHENTICATION_H_
 #define SECURITY_BUILTIN_PLUGINS_AUTHENTICATION_H_

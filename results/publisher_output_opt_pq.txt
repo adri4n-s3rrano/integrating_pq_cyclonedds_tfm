@@ -1,0 +1,1069 @@
+-----------------Iteration 1-----------------
+1717234499.730538 [0] dq.builtin: Remote secure participant ac8fdda9:aa4edde0:f08b40d8:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: c3 8e c1 38 11 d5 ea 44 45 d9 70 96 76 b4 05 71 b4 a8 c0 f5 4d 11 6a 2b fa 73 88 b0 56 54 47 c5 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 2-----------------
+1717234500.257122 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e1d7b:ca267bb4:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 44 ec dd 05 88 91 96 87 3b 9e bd de e6 d3 2c de f5 13 3c 3a 4c 7c ea ed 57 1d 2a fd b0 86 a6 21 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 3-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 4e 0a 57 00 08 27 c4 8b 97 e3 ee f4 f2 93 df 77 ee c5 2b e6 63 92 81 90 7a f0 fd 39 07 6d 2c 9e 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 4-----------------
+1717234501.313575 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e62a3:4b4df582:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 08 37 89 d3 ae 30 0c b8 aa 5e f1 fb d3 f5 4f fb 50 33 64 f7 e9 a5 f9 fa b6 30 5f b9 e6 4b 81 1d 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 5-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 0e 78 fd 6b a5 10 fc 8b 72 e7 32 7d 63 e8 14 98 b4 8d 8c 70 07 9c 9f af 2b 12 e4 e7 d6 f6 b7 38 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 6-----------------
+1717234502.365777 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e172f:46097cb8:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 36 7b 09 50 64 e0 4d c0 1d 6f ee de aa d0 ab 87 8f 83 2a b7 ef 13 b8 0d 98 0d 3c 43 d5 7b 37 ea 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 7-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 45 11 ec 5f d0 ba 7b 60 ae e2 10 3d 3d 58 bd 4a de 6f 4f 09 cb 5b 14 c5 a3 2c fd 38 04 18 4a a9 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 8-----------------
+1717234503.421480 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e1a0c:3021aa10:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 68 6a 44 aa 64 bb 98 56 d2 0c 82 f5 da ad 96 79 67 64 b2 9f cc f7 14 50 7d 2b e1 88 d9 e2 ca 57 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 9-----------------
+1717234503.946252 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ec213:9414aefa:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: f0 7c 62 6b fe f1 e9 15 6a 29 56 cd 5b 44 79 73 ee 8e ab 87 96 f7 3c 35 9a 9b 03 5b 56 ae 0f 71 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 10-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 08 34 62 0f ed dd 77 35 5e e7 78 43 7b 46 c9 b0 73 d6 e9 4a c2 53 78 95 f4 0f 00 82 10 b5 53 d4 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 11-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: a3 c2 47 40 d2 bc 08 37 ab 05 a9 f4 45 77 8e 85 80 60 a7 87 1a b6 ed eb c9 04 01 87 49 38 bd 78 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 12-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 94 72 a8 de e8 15 25 a5 e6 38 e5 9a 45 76 79 04 df 07 34 00 db e4 12 ff 75 6d 04 17 f0 aa 7e 6c 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 13-----------------
+1717234506.073303 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e68eb:dba19b68:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 72 b0 82 b9 47 c5 f2 c6 6d 6f 6f 31 0d db 6a c5 3e c1 ad 3c d4 41 2a a8 17 b4 6d 84 46 8e 5d 6b 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 14-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: c5 cd 0b d9 66 ec ac 46 d2 33 71 f7 c0 7a 81 73 2b 97 00 4c e0 53 c0 70 b9 bf b6 1d b2 73 d1 df 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 15-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 8d a2 37 a6 bc b9 ed 34 8e a2 17 ad f5 b5 a7 b4 00 33 20 56 81 8c a1 1e 78 e7 47 59 66 1a 12 f4 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 16-----------------
+1717234507.641015 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e070d:b3293b7b:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: bc ee d8 4a 70 ac 3c f7 de 8a bf 7e 7d 47 f6 54 f9 37 95 dd 76 7b fc 4c e6 2d ba b5 9e de 9b cc 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 17-----------------
+1717234508.166119 [0] dq.builtin: Remote secure participant ac8fdda9:aa4edc14:67e0ae3d:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 0b ed a1 39 7a f2 6b 42 a0 3c da 3f 95 88 91 0f 7e 5d 79 56 72 ac 51 27 58 62 ae 67 bd da d1 24 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 18-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: e4 be 47 3c 06 a6 77 b2 59 0e 7e 24 e1 fe 21 c0 39 a9 14 5d 2f 44 2c 5a 44 ac 05 aa 7f 6d b9 72 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 19-----------------
+1717234509.226926 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e96c3:fe2534b2:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 67 ae 09 7a f5 24 e2 75 27 43 1f 64 83 45 66 91 ba cc d8 c5 18 9d 4d 53 dc e1 2f 4c b0 7e c4 18 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 20-----------------
+1717234509.760226 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e50c7:1aff0c1a:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: e5 9d 0d fd 41 92 e2 e6 d0 44 66 25 c6 f0 05 23 b5 1f 75 6f 6f f3 3f d7 92 a8 30 a6 a8 ee 98 76 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 21-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 28 45 49 8c 42 ef a7 4b 7c 81 81 de cd 32 ae fd 77 2d ac 60 fd 9c 99 53 de b4 7e c9 2d 27 32 2c 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 22-----------------
+1717234510.824282 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e6114:9e61b3f5:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: c6 27 53 e1 e5 d5 73 c5 fe ab 50 72 5e 93 ff 77 c3 cd 23 67 01 e2 fd 81 21 ae 47 4c 38 1c b1 ef 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 23-----------------
+1717234511.348585 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e795b:99dd1b20:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 4e f6 14 0e f4 ee bc 43 c5 75 2a 9e a9 f6 65 8a 22 08 2b c4 8f 45 fb fc 9b f8 c9 9b fb b1 46 07 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 24-----------------
+1717234511.872851 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e893f:7091107d:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 58 0c 24 e6 45 1b 73 c5 c0 28 30 3a 02 28 ed 28 92 a6 a7 a5 23 06 93 4b 99 e4 93 d4 af 5f 9f 2d 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 25-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 0c cb 51 ec 86 c9 9e 13 4e 3f fa b7 65 cb c9 a9 13 4b 20 b0 6a ce 21 4c f9 66 09 11 a7 55 07 34 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 26-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: be 70 1f cc 02 57 32 ca c1 12 49 6c 6a bc 92 4a 95 91 fa 18 95 a5 88 2f c7 df f3 32 79 e3 67 77 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 27-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: dd 86 ff 56 c9 ee 4f fe 76 00 b1 ae 71 19 45 78 3e 13 25 40 07 45 15 5d ed e5 3c 9f 32 e0 88 86 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 28-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: c7 ec 17 53 1b 6c cd 62 a3 94 9b eb 96 30 21 e7 62 0c 2f 74 c0 67 81 91 2c 6b 3c f6 7f 93 1a a5 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 29-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: a1 4c 46 1a 24 9e 60 74 d8 21 19 33 ae 2f c1 51 fa 28 bb 6d c0 93 5e a6 33 08 3c 98 b6 56 a8 39 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 30-----------------
+1717234515.028527 [0] dq.builtin: Remote secure participant ac8fdda9:aa4eb13c:adf32708:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 01 69 98 fe f0 d8 32 27 13 8b 6a 85 43 e2 17 82 d1 b9 b7 ee 3b 74 be e9 78 4a 74 d0 cd 3c b8 e9 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 31-----------------
+1717234515.556857 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e7e72:a962c8c6:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 60 45 3a 5b ba 84 c9 78 28 cf d4 2b 2b 33 16 42 12 a2 cb 89 02 4c 71 0f 62 18 bf 75 76 59 1b f2 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 32-----------------
+1717234516.080563 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e7d89:1b22494a:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 8a 7c e6 ae e5 89 5d bb e1 69 7e d8 3b c2 00 7d 41 8e 3e ef 6c 2a d2 35 b9 76 ed 85 11 81 29 b0 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 33-----------------
+1717234516.604443 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ef344:649d4f40:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 1d c6 ac 27 3e 9b 89 88 e6 9a 43 1c 0e e2 02 85 22 de 7c 31 5e e9 33 08 90 37 3a a8 7b d2 9f 1b 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 34-----------------
+1717234517.144694 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e7636:81d9afcf:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 44 89 ed 19 16 c0 38 3a ed 9f 05 63 a4 33 d5 4f 47 e7 30 a6 8d 6e c8 5e d0 3f 32 20 78 4c 39 68 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 35-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 93 16 4a 85 8e e1 19 79 ee dd 68 44 c9 81 33 cd 91 06 95 56 5f ae 17 78 52 d7 8c 73 29 0a f9 07 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 36-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: b0 59 4b c0 0c 03 bb ec aa 5f c4 c0 9d fc ad b2 c8 b4 dc b3 bd 06 e7 d2 a6 00 43 83 0e 27 dd e8 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 37-----------------
+1717234518.737195 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ee80c:fd789e26:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 4f 61 d2 c4 35 a5 c8 14 da 72 35 dd d6 f1 b0 79 69 62 96 c9 b0 70 b8 cc 68 d4 a9 66 01 e3 ec dd 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 38-----------------
+1717234519.262524 [0] dq.builtin: Remote secure participant ac8fdda9:aa4eb04d:561caf0d:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 62 3e 7e 29 34 6a 7a d9 a0 2f e2 f8 e6 a9 aa 39 d9 6d c2 fe 0e a1 a7 0b 28 7c 85 03 30 87 00 f7 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 39-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 5f 16 06 2d df 16 61 d1 b8 fa a8 5a 25 81 d7 2b 62 bc 62 48 b1 7f 89 cf a8 ec f6 bc 85 d4 78 70 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 40-----------------
+1717234520.324248 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e4e2f:30f6d6b0:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 42 e3 e3 55 6d e6 ba 25 a1 9c 3e 0f 23 e0 81 0e bc 28 87 df 66 f2 81 2b 18 b2 e8 ba 2f 17 2a b1 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 41-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: c6 84 df 6b de 33 b7 08 18 41 e0 29 01 fc 1d 20 44 a9 a3 8e 75 70 3e 8c e8 8a 17 ae 05 88 1a e6 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 42-----------------
+1717234521.382985 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e8416:a5a6be88:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: ae 97 92 f6 ae 0c 94 62 35 92 d4 c1 28 2d 08 db c5 3f ea d2 0d 72 54 02 db b7 94 26 f5 d1 6f 01 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 43-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: df 09 7d 48 64 67 26 aa a0 14 d5 2a b7 a4 65 9e 0d ad 27 50 68 03 4a b5 f6 df 72 9f 47 b5 13 ea 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 44-----------------
+1717234522.432681 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e7513:d4676d60:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: f6 2e b3 60 eb b8 63 ed 92 b6 dd f1 5e 17 ad 5f a8 86 bb 50 2c ad 1b 3e 88 af 09 08 4e e4 cc 80 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 45-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 18 91 25 65 23 6c 97 c3 19 b3 37 8b e5 0e c4 65 35 dc 49 98 ce dd 6a ae 8a 3a 4c 89 34 f7 c0 8d 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 46-----------------
+1717234523.485475 [0] dq.builtin: Remote secure participant ac8fdda9:aa4eaabb:1b1152f5:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: b9 25 52 70 68 f9 cc 44 23 49 86 a7 85 86 d9 a8 25 9c fc 47 e2 3d 4e 00 af ea 2d 40 70 07 11 e9 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 47-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 7d 1a 62 a7 b1 78 01 17 63 53 4b 13 c5 de d5 7a 99 c6 07 6b ca 00 40 ba f4 22 41 5a c4 f6 21 d4 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 48-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 88 2b a3 f2 d6 47 86 b0 62 31 ef 44 cd 1a db ef 17 80 85 e2 c4 30 a1 98 14 36 54 53 d0 62 d8 d1 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 49-----------------
+1717234525.046724 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e22a2:b6634872:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: b4 e8 15 25 99 8f b4 8b a8 9e a6 82 4e 13 3a 8d e4 ff ae 41 56 70 67 df 19 12 2f ca 3f 12 b2 71 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 50-----------------
+1717234525.581911 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e2b5e:c9942cd0:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: f0 4a 99 a1 7e b2 d9 ad 9b 35 c1 0e 75 3d 62 3e 24 b0 24 c8 9e 1c 3e f3 6f 6c 34 f0 f2 f0 72 e9 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 51-----------------
+1717234526.105326 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e948e:78e3b82c:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 9b 8b a6 62 14 74 e7 c8 92 c1 30 3e d3 25 e5 cd a0 da 4b c5 f6 03 89 18 97 2d 20 54 7c 7a ea ab 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 52-----------------
+1717234526.638093 [0] dq.builtin: Remote secure participant ac8fdda9:aa4eb9b5:cb01f7e9:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 71 c0 c6 2d a6 f7 8a 66 bd 21 51 be 69 84 72 a2 cb 63 e1 92 b8 6f 11 d0 0c dd 6a a6 f3 46 f5 7f 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 53-----------------
+1717234527.177080 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e85d6:359f5956:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 48 62 69 10 8c c4 de 3d 20 52 94 04 62 65 73 43 4f 49 b1 d0 22 49 ac 80 4b 0d 30 36 27 5f a1 15 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 54-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: c8 1a 9d 13 ca 84 f2 e3 2e 64 bf 25 8a f4 3a 05 19 a5 39 b2 0c f9 94 a1 d5 84 34 29 40 2f 2e 05 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 55-----------------
+1717234528.213547 [0] dq.builtin: Remote secure participant ac8fdda9:aa4edd87:1c639520:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 54 a1 a6 c5 54 81 7b 67 8e cd 7c 2b fc ab e4 69 6c 26 f2 63 04 cf fb cb 3b 7a 37 e9 3e 35 92 3c 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 56-----------------
+1717234528.752770 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ebed2:f46e1dc8:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 2e 33 84 df 3c a6 b1 4c 04 9a a2 26 a7 75 d2 5b f7 9e 1f 79 f6 6d d3 7d d6 63 e9 e0 f8 7d 3d 3c 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 57-----------------
+1717234529.277570 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ed378:88a7b2bb:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 77 55 39 3b 54 96 20 9a 36 58 cb 8b 6a 5f 51 ff 17 34 59 9c 9a 3d 97 00 56 0c ed df 0c e5 7a 40 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 58-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 08 7e ff 1f dc 13 74 04 3d 16 dd 71 63 42 86 84 e4 e5 c2 14 9e 43 18 65 25 a9 89 0e 82 68 97 b3 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 59-----------------
+1717234530.343414 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e6f38:4b0929a6:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 32 da 47 79 2f 5d 7b 17 0a 20 e8 76 eb ba c3 59 85 55 4a 4a 2c c1 bf 11 5f 65 7a e7 63 fa 00 9f 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 60-----------------
+1717234530.876154 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e2c6f:d27bf231:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 2d f8 0b 5e 2e 5a 11 16 29 a2 78 f6 74 39 50 37 d3 8e f6 24 c0 c3 eb a3 87 af 45 2e bc f0 32 3b 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 61-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 18 94 b6 9f 40 47 80 80 0e 21 5c ba ae d3 8d 3e e9 2c c0 d4 a6 c5 4e 28 66 9b 5b 25 70 33 b5 a8 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 62-----------------
+1717234531.931841 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ef043:b6491004:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: a9 81 ff 07 fe 23 33 cb 06 17 9f 8e 19 35 ea 1f 1f a5 17 94 cf ef 34 6a d6 c8 7c b4 13 a7 8e 7f 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 63-----------------
+1717234532.469033 [0] dq.builtin: Remote secure participant ac8fdda9:aa4eda53:a2e0b4b4:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 5a ce c1 44 9e 9b 73 81 dd 2a 25 96 b1 0c 5c dc 63 8d c4 fa 2c 9b 8e ee b7 2b a3 5a 0b 3c c3 8e 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 64-----------------
+1717234532.997596 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e0a9d:848d6ef4:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 5f 3a 5d d5 e1 f6 0e 43 5c 84 af 48 98 18 f6 3a 30 39 21 e4 12 be d7 e1 0f 9d 95 e2 e3 ce 51 76 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 65-----------------
+1717234533.522486 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ec9fb:b38c52b8:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 1d 39 c0 67 3f 39 c9 5a 50 7c d2 61 06 c3 9f 96 c5 e9 31 ec aa 0c 1a 11 a1 c7 0d ad 21 ee 79 81 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 66-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 4e 68 ba d8 13 da 61 a7 8c f0 dd 46 99 19 09 fe 8c 89 0a 3c dc 45 ed f1 22 80 17 e6 f8 b5 72 00 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 67-----------------
+1717234534.580750 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ec431:e6805bb6:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: a8 b6 90 57 b7 7d 06 a7 bf db 37 f0 01 b0 d0 e8 c7 87 7b de 9c 67 a7 9a a7 67 d9 ea c7 59 e3 1e 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 68-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 76 4d b4 8d 00 af dd be 2d 0a 1a 4e 7d e3 25 5c 32 42 0c d6 bf da 70 11 f9 d8 0a 02 10 4a 32 0f 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 69-----------------
+1717234535.648833 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e7a07:67041189:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 54 fd 8d 53 ff eb aa 2f 09 60 b9 04 e0 b7 22 de 71 3c 32 1e 8f c2 c5 bb fb c0 36 db 72 51 b4 a6 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 70-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 77 23 06 22 5a cc 8d 1a 5b 09 03 39 21 97 dc 0e b4 c5 67 4e 85 a3 7d ff 05 d3 20 23 36 28 c3 08 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 71-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: f8 55 40 19 12 38 93 07 58 db cd 53 d6 3c ad c9 8a 98 22 b0 c3 e1 70 05 57 7a 73 9f 54 f8 04 9c 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 72-----------------
+1717234537.261065 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e923a:7b255603:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: a4 88 6b 50 ec e2 d8 49 a0 44 45 fa 07 be 68 1b 37 8a 6b 49 95 41 f6 fd e1 a7 c5 71 2c b5 9e 94 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 73-----------------
+1717234537.816024 [0] dq.builtin: Remote secure participant ac8fdda9:aa4eab81:b6fde3e8:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 6a 64 2f 63 45 83 6d df 8d d9 d1 7e c1 4a e9 55 18 e1 39 70 90 57 0c 1d b4 ab 03 8c 90 72 49 d1 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 74-----------------
+1717234538.348519 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e77ed:a61d605b:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 5c f1 f5 ed 07 da 12 f9 b6 6f 2d d4 c0 06 5d a9 2f bc b6 66 9d bf c4 a2 0f c1 d6 d9 44 f2 72 12 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 75-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: b8 2f 95 a0 5b a3 ae ab 0b 89 3a 7a 77 97 33 ac dd f9 37 a6 da 88 e9 2d e7 0d 7a 81 c0 2b b5 1a 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 76-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 06 95 69 c1 da 22 d2 09 17 43 02 00 77 66 f3 28 f3 92 26 e9 fa 5f f8 cc 5a f5 67 bf 9a 73 6d c4 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 77-----------------
+1717234539.949779 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e3b96:359e3458:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 30 21 83 e3 75 cc 48 30 2d 35 11 e2 fe da ee 0b 32 3e c0 a4 89 96 4b 73 5d 0c 42 56 04 73 ca f9 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 78-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 17 a4 41 8b 5b ac be 91 37 d6 02 d6 fd a7 bb fa 76 9b 7b 8c fc 11 16 7a 08 ae 16 df e3 be a3 cb 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 79-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: b4 d1 b3 ee 9c b4 da 85 d7 6f dd 3c 16 03 90 5c 07 96 41 4c 43 c7 8e 5f 54 cf ae 2d f0 0f a2 06 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 80-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 13 de 80 b1 d5 d0 23 a5 59 5f 35 0e 8e 79 9d ce 02 16 47 66 79 ad 21 a0 fd 64 57 77 a3 c2 d2 59 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 81-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 34 45 58 11 28 ff 9f 46 cf 40 a1 31 18 3b d4 a5 10 6b 1c 8e 2c 7b 42 bf 6b ad 36 c2 f8 11 0f f2 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 82-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: a9 b6 92 a1 f1 36 a7 bd 11 28 4c 75 b9 02 70 12 77 c6 f9 9b 37 cb ad d9 46 d7 39 e3 26 69 8d 91 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 83-----------------
+1717234543.082369 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ed455:8e819523:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 74 88 45 f0 fa 9e e1 f7 77 38 7a 2b cb f6 5b 39 d0 11 25 9f 1f 0d 29 3b 9b 0e a6 24 99 12 ca bb 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 84-----------------
+1717234543.606187 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ee891:5dbe11b6:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 7a 86 b2 32 c6 3f 3e 18 64 9d f9 33 83 d9 af 5d 6c 54 73 e0 b8 37 d8 a8 bd 56 6f 63 9e 29 41 26 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 85-----------------
+1717234544.130500 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ecd12:7d86b3d8:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 87 c8 b1 12 b8 4e f6 75 21 42 99 c6 c4 c2 bc af 62 8a f7 b5 aa 77 de f9 8f b1 e2 ef 6b 51 98 b3 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 86-----------------
+1717234544.654352 [0] dq.builtin: Remote secure participant ac8fdda9:aa4eaca5:ac7f34cf:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 90 b7 16 65 52 6d 22 74 53 49 91 60 b2 f4 98 35 46 7a 4c f6 87 b8 3f a6 d4 e4 36 1d a8 a0 b5 3c 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 87-----------------
+1717234545.179069 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e273e:3211c971:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: bd 22 2d b1 82 af 98 dd 61 17 9f f1 3e 38 e5 cd 2a 90 11 a0 a8 7f 11 93 db 67 1b 39 00 c3 0e f3 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 88-----------------
+1717234545.713450 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ea314:eaee6a9e:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 97 13 f5 a9 23 2b de a0 51 0c 24 78 9a a9 2f c6 43 b9 d6 a6 85 5a fe 4d 85 ee 5e d5 ae 3b 7b 1e 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 89-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 3e 00 4b 7d 8e 5c 7f c6 75 18 e1 42 dc f3 6b 77 14 05 2e 2c d3 10 ca 00 f0 9f de 9c 0b 51 76 52 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 90-----------------
+1717234546.800541 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e51e7:ae563f90:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 78 54 91 b6 b7 0d b3 8d 68 ee 8c 9a a0 cc 0d be 2b 83 1b 70 de 2d df a3 d8 cb fe 29 0d 6e 5f ff 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 91-----------------
+1717234547.310539 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e0070:c203bc6a:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 9e b0 0e c8 64 1d 63 e4 f8 92 db e4 cb 01 97 e8 5e 4c 2a fc 75 d8 5c 16 c6 4d 98 29 04 ce 49 20 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 92-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 24 39 eb 0b 4e fb c5 0e c4 df 4a d9 1f 32 63 25 17 99 0b 02 e4 88 6b ce 5e 72 ec 5b 06 c2 ac f9 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 93-----------------
+1717234548.366100 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ee097:53f1d39c:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 16 72 6a a4 f1 6f cf 9f b5 c1 47 85 d7 ee e3 0b e2 ca c8 a1 3b 16 e0 b7 2e 92 2e e9 ab 9e 54 81 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 94-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: e1 35 1c 97 49 51 b2 38 26 c2 d4 d0 56 ce 31 9b 3c 8b c1 54 27 7a a4 69 fe 89 9c ec 86 13 84 8f 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 95-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: e8 d4 e1 43 5f 2f 13 96 be 97 a6 56 68 c8 67 3f 73 ca 27 ef c4 fe a2 94 17 30 c9 b5 c2 5b 81 aa 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 96-----------------
+1717234549.918536 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e5933:422ceb1c:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 9e c7 cc 74 f0 05 c5 99 0b 7f 1c 29 23 9b 1e d4 d1 5c 26 e8 de ab 9e 25 0d 6b a1 c0 aa 0a d3 c4 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 97-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 11 9d dc 3f 19 3d 61 dc d7 96 cf 32 03 bc 20 05 94 62 94 d2 4d dc 67 9c b3 2c 50 4f 7d 18 4f 02 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 98-----------------
+1717234550.971603 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e4a80:983ea283:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: f5 b6 12 5b bb 8f d3 29 13 29 b0 d2 ad 52 f8 4e de 50 1f 75 5d e3 46 d3 8e 55 9a 04 2f 46 d7 7d 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 99-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: b4 3c ce ca ef 15 35 58 61 a9 68 ce 1d a1 63 48 a0 98 3d 8a b2 d7 06 4f a6 93 62 ba aa fb 4d ce 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 100-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 18 d1 a4 8f 81 a6 29 7c 46 74 2b a8 17 32 7f dd ca f0 9a 53 f4 3d 7e fb 90 eb ee 1e 22 77 26 86 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 101-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 67 89 0e a5 3a f4 77 ae 8c a5 99 3d ec d5 4e 02 ae 6f 1c b8 c9 a5 9c d5 bc 30 5d 9e 51 78 70 9d 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 102-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: eb db af 23 7b 79 73 b2 c3 f2 c7 7e cc f8 2b da 9e cc 8f 6b f7 28 49 10 8e 15 a9 7e 18 63 bb d1 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 103-----------------
+1717234553.595863 [0] dq.builtin: Remote secure participant ac8fdda9:aa4eff39:834e28f0:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: fa ad a3 e4 73 f3 51 a3 5b b2 eb d0 c5 4b ca f0 a2 a1 71 20 a1 10 1f 32 68 20 82 d0 ec 45 75 21 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 104-----------------
+1717234554.155298 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e426d:b55f9056:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 15 e1 f4 87 06 44 7a d5 91 db bf 62 aa fa 61 41 e1 e1 60 23 90 ea c5 ef d9 37 3a 25 8c 8d ff 1c 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 105-----------------
+1717234554.698038 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e2d62:7d73672b:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: a9 b6 29 bb f0 a7 7a 82 28 44 77 ad 99 e8 22 52 a2 9e ad 8a 5a 2f dd b5 1a 9f ff ad 44 96 db 13 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 106-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 88 07 e5 18 85 5f a7 06 12 d1 bf 60 c7 a0 28 5c 95 6d 95 4f d0 c0 88 df ae 2d df d3 c2 3d 61 9c 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 107-----------------
+1717234555.764770 [0] dq.builtin: Remote secure participant ac8fdda9:aa4ef3b7:df103a38:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 0b 55 7a dc 38 5f b5 d9 9b b9 a4 ec e0 57 ff d7 03 46 8f bd 3b 36 82 e5 4d fd ca 5c b2 c1 2e 2e 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 108-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 49 4f 63 dd 45 11 4c 10 65 5a 73 5f 34 7e 64 14 70 82 0b a1 79 65 b4 5a 3a 1f 99 37 c8 8a b5 dd 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 109-----------------
+1717234556.801879 [0] dq.builtin: Remote secure participant ac8fdda9:aa4eb5e4:ccda6145:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: fb 2d 1c 37 a4 e5 45 21 6d be 89 7c 6c 5a b9 4b af a4 c9 c9 a2 11 41 f3 9d dc 03 b5 ba 65 7f 16 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 110-----------------
+1717234557.326817 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e199b:46c14539:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: c9 35 28 2a 2c 97 2b d6 cd 41 a0 ae 19 6f 51 29 f8 ff 98 a6 fa 4c 31 09 3f 52 2d 2f 43 53 4b 59 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 111-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 00 8d 55 57 de 69 ce e4 c2 12 95 02 a9 ed 68 54 a4 95 50 04 e7 1a 4f 0e cf 66 b8 72 94 73 c7 ea 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 112-----------------
+1717234558.382679 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e3b9e:7e030061:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: b1 78 39 19 9e 83 63 d1 86 af d9 29 cc 72 ea 1f 81 89 22 31 d4 d4 08 49 07 27 61 c6 cc 54 f9 a4 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 113-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 49 64 b1 ec 51 c8 88 f2 ce 5b 67 a8 16 37 9b 2f 2a a0 b2 7b d4 55 92 d3 c3 14 41 e5 c5 47 48 a4 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 114-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 98 fa 00 69 3b e8 2e ec 7a bd de fb 61 a3 0d 3d f9 74 54 85 5a 79 65 b3 4c c2 80 49 64 03 1d 27 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 115-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 6b 80 94 ac 08 94 d1 58 60 29 43 82 e5 6a 25 a9 1c 0a e6 27 d9 64 fe 1f 5b c8 df cf 51 1d 78 72 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 116-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 82 6b f4 8b 9c 8e df 03 49 e2 4d 43 b8 4c 78 48 9f dc 2b 1a 9f 3e 2b 78 08 9f e8 ea f7 dc bf ef 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 117-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 61 a0 53 09 a1 ee da 77 11 03 21 79 b0 7b 8f 82 ea 73 a9 f5 70 71 a7 13 64 c4 84 30 b8 41 2c c8 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 118-----------------
+1717234561.553020 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e1831:e3cae9b5:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 99 e9 0f 82 78 cc 86 af ac c5 8f b7 aa cd bc 76 72 b8 fe bf eb 64 fc 36 98 5c 6e 24 02 94 be 5c 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 119-----------------
+1717234562.078313 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e6813:810dd115:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: d4 f8 f7 a3 5f 85 d6 c8 31 25 a9 e3 3b 75 0f d0 a9 45 0e b8 c9 56 39 cd 83 76 72 29 f8 e5 27 7a 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 120-----------------
+1717234562.604275 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e7783:9f915da:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 1f aa 74 87 ec 85 12 5a bf 81 b8 74 ad 58 a6 4d 2b 06 29 9b b4 b1 8e 5f a7 2f 88 ab 61 d2 30 b9 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 121-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: d6 74 fb f8 79 e4 e4 a9 c6 d8 91 fd 93 a9 c9 01 a6 6d c4 4c 8d 7d ba 50 48 e0 5c f8 ef e4 41 0b 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 122-----------------
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 23 a6 eb ad 26 ea e1 84 68 f7 f7 7d 38 86 b9 38 3f 25 22 7f 10 c8 ed 30 bd 70 dc 15 41 94 73 14 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 123-----------------
+1717234564.196301 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e5e04:5084f3a6:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: f1 40 fc 9f b5 a2 6c 2f 2b 11 27 4f 35 7e 0e 85 49 55 5c 15 31 51 2c 5b 6b 46 09 bb fd fd 3d d1 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 124-----------------
+1717234564.720878 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e74db:1ec37976:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_request()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 0c 79 2a 9a cc 88 76 32 2f c7 86 52 4f 5a c6 08 87 ac 08 46 b3 cf 6f 29 05 81 79 af 02 c6 40 89 
+
+=== [Publisher]  Writing : Message (1, Hello World)
+-----------------Iteration 125-----------------
+1717234565.247399 [0] dq.builtin: Remote secure participant ac8fdda9:aa4e25ca:45c4b9df:1c1 not allowed
+=== [Publisher]  Waiting for a reader to be discovered ...
+CUSTOM PLUGIN: PQ begin_handshake_reply()
+CUSTOM PLUGIN: PQ process handshake()
+
+Shared_secret: 94 b7 b6 b3 77 75 1d d6 2a f1 0d d6 fc c6 dc 1c d0 09 84 af 99 07 ef 12 a4 83 19 5f b3 c7 f9 42 
+
+=== [Publisher]  Writing : Message (1, Hello World)

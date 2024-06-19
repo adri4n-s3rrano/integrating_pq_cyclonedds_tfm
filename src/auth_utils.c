@@ -1,9 +1,20 @@
-// Title: Integrating post quantum criptography on a publisher-consumer communication over CycloneDDS. 
-// Author: Adrián Serrano Navarro (100429115)
-/* Description: This code implements a KEM handshake that uses post quantum algorithms, kyber768 (key aggreement) and Dilithium3 (signature). 
-                Publisher and consumer start a communication on CycloneDDS and began a KEM handshake with a key generation, an encapuslation 
-                and a decapsulation process in order to authenticate the other part and establish a shared secret. 
-*/
+// Copyright(c) 2006 to 2021 ZettaScale Technology and others
+//
+// This program and the accompanying materials are made available under the
+// terms of the Eclipse Public License v. 2.0 which is available at
+// http://www.eclipse.org/legal/epl-2.0, or the Eclipse Distribution License
+// v. 1.0 which is available at
+// http://www.eclipse.org/org/documents/edl-v10.php.
+//
+// SPDX-License-Identifier: EPL-2.0 OR BSD-3-Clause
+//
+// PQSec-DDS:
+// Copyright (C) 2024 Javier Blanco (@fj-blanco)
+//
+// KYBER768 KEM integration and Dilithium3 signature via liboqs:
+// Copyright (C) 2023 Adrián Serrano Navarro (@100429115)
+// as a part of the Master Thesis "Integrating post quantum criptography on a publisher-consumer communication over CycloneDDS"
+// see README.md for details
 
 #include <assert.h>
 #include <string.h>
@@ -24,7 +35,15 @@
 #include "auth_utils.h"
 
 #define MAX_TRUSTED_CA 100
-#define PLUGIN_DEBUG 1
+#define PQ_CRYPTO 1
+
+#define OQS_KEM_TESTS 1
+
+#ifdef OQS_KEM_TESTS
+#include <openssl/provider.h>
+const char *modulename = "oqs-provider";
+const char *configfile = "/opt/oqs_openssl3/.local/ssl/openssl.cnf";
+#endif // OQS_KEM_TESTS
 
 typedef enum {
     AUTH_CONF_ITEM_PREFIX_UNKNOWN,
@@ -163,7 +182,7 @@ static DDS_Security_ValidationResult_t check_key_type_and_size(EVP_PKEY *key, in
       return DDS_SECURITY_VALIDATION_FAILED;
     }
     return DDS_SECURITY_VALIDATION_OK;
-
+  
   default:
     DDS_Security_Exception_set(ex, DDS_AUTH_PLUGIN_CONTEXT, DDS_SECURITY_ERR_UNDEFINED_CODE, DDS_SECURITY_VALIDATION_FAILED, "%s has not supported type", sub);
     return DDS_SECURITY_VALIDATION_FAILED;
@@ -213,7 +232,7 @@ static DDS_Security_ValidationResult_t load_X509_certificate_from_bio (BIO *bio,
     return DDS_SECURITY_VALIDATION_FAILED;
   }
 
-  if (get_authentication_algo_kind(*x509Cert, PLUGIN_DEBUG) == AUTH_ALGO_KIND_UNKNOWN)
+  if (get_authentication_algo_kind(*x509Cert, PQ_CRYPTO) == AUTH_ALGO_KIND_UNKNOWN)
   {
     DDS_Security_Exception_set(ex, DDS_AUTH_PLUGIN_CONTEXT, DDS_SECURITY_ERR_CERT_AUTH_ALGO_KIND_UNKNOWN_CODE, 
     DDS_SECURITY_VALIDATION_FAILED, DDS_SECURITY_ERR_CERT_AUTH_ALGO_KIND_UNKNOWN_MESSAGE);
@@ -443,7 +462,7 @@ DDS_Security_ValidationResult_t load_X509_certificate(const char *data, X509 **x
   ddsrt_free(contents);
 
   if (result == DDS_SECURITY_VALIDATION_OK)
-  {
+  { 
     if (check_certificate_type_and_size(*x509Cert, ex) != DDS_SECURITY_VALIDATION_OK ||
         check_certificate_expiry(*x509Cert, ex) != DDS_SECURITY_VALIDATION_OK)
     {
@@ -479,7 +498,6 @@ DDS_Security_ValidationResult_t load_X509_private_key(const char *data, const ch
     break;
   }
   ddsrt_free(contents);
-
   if (result == DDS_SECURITY_VALIDATION_OK)
   {
     if (check_key_type_and_size(*privateKey, true, ex) != DDS_SECURITY_VALIDATION_OK)

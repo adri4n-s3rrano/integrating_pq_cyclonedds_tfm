@@ -7,6 +7,11 @@
 // http://www.eclipse.org/org/documents/edl-v10.php.
 //
 // SPDX-License-Identifier: EPL-2.0 OR BSD-3-Clause
+//
+// KYBER768 KEM integration and Dilithium3 signature via liboqs:
+// Copyright (C) 2023 Adrián Serrano Navarro (@100429115)
+// as a part of the Master Thesis "Integrating post quantum criptography on a publisher-consumer communication over CycloneDDS"
+// see README.md for details
 
 #ifndef AUTH_UTILS_H
 #define AUTH_UTILS_H
