@@ -18,7 +18,7 @@ This repository implements a Key Encapsulation Mechanism (KEM) handshake using p
 
 ### Usage:
 - Clone this repository.
-- Follow the setup instructions provided in the readme file of the main branch of the repository https://github.com/fj-blanco/dds-pqsec. (Take into account possible relative paths). 
+- Follow the setup instructions provided in the readme file of the main branch of the repository https://github.com/qursa-uc3m/pqsec-dds. (Take into account possible relative paths). 
 - Execute the code to observe the integration of post-quantum cryptography in a publisher-consumer communication with the HelloworldSubscriber and HelloworldPublisher examples in CycloneDDS.
 
 ### References:
